@@ -1,0 +1,33 @@
+<aside class="h-screen w-20 bg-darkblue-2 rounded-r-[19px] pb-8">
+  <nav class="flex flex-col justify-between h-full">
+    <div class="w-full">
+      <img class="" src="/assets/logo.svg" alt="" />
+    </div>
+    <section class="flex flex-col gap-5">
+      <div class="grid place-content-center">
+        <button (click)="toggleTheme()">
+          <img
+            *ngIf="!isDarkMode"
+            class="w-6 h-6"
+            src="/assets/icon-sun.svg"
+            alt=""
+          />
+          <img
+            *ngIf="isDarkMode"
+            class="w-6 h-6"
+            src="/assets/icon-moon.svg"
+            alt=""
+          />
+        </button>
+      </div>
+      <div class="h-[1px] bg-grey-3"></div>
+      <div class="grid place-content-center">
+        <img
+          class="w-10 h-10 rounded-full"
+          src="/assets/image-avatar.jpg"
+          alt=""
+        />
+      </div>
+    </section>
+  </nav>
+</aside>
