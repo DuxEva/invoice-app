@@ -1,9 +1,13 @@
-<aside class="h-screen w-20 bg-darkblue-2 rounded-r-[19px] pb-8">
-  <nav class="flex flex-col justify-between h-full">
-    <div class="w-full">
-      <img class="" src="/assets/logo.svg" alt="" />
+<aside
+  class="h-20 w-full lg:h-screen lg:w-20 bg-darkblue-2 lg:rounded-r-[19px] lg:pb-8 pb-0"
+>
+  <nav class="flex justify-between lg:flex-col h-20 lg:h-full lg:w-full">
+    <div class="h-20 lg:w-full">
+      <img class="object-fill h-full" src="/assets/logo.svg" alt="" />
     </div>
-    <section class="flex flex-col gap-5">
+    <section
+      class="flex lg:flex-col items-center gap-5 h-full lg:h-24 lg:w-full pr-5 lg:pr-0"
+    >
       <div class="grid place-content-center">
         <button (click)="toggleDarkMode()">
           <img
@@ -20,7 +24,7 @@
           />
         </button>
       </div>
-      <div class="h-[1px] bg-grey-3"></div>
+      <div class="h-full w-[1px] lg:w-full lg:h-[1px] bg-grey-3"></div>
       <div class="grid place-content-center">
         <img
           class="w-10 h-10 rounded-full"

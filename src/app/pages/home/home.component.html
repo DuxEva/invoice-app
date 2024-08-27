@@ -2,46 +2,34 @@
   <!-- Invoice navbar -->
   <div class="flex gap-7 items-center justify-between">
     <div class="flex flex-col gap-[1px] dark:text-white">
-      <h1 class="text-xl font-extrabold">Invoices</h1>
+      <h1 class="text-lg md:text-xl font-extrabold">Invoices</h1>
       <p class="font-thin text-sm text-grey-3">No invoices</p>
     </div>
-    <div class="flex gap-16">
+    <div class="flex gap-16 max-md:gap-4">
       <button class="flex gap-2 items-center dark:text-white">
-        <span class="font-semibold">Filter By Status</span>
+        <div class="flex gap-1">
+          <span class="font-semibold">Filter</span>
+          <span class="font-semibold max-md:hidden">By Status</span>
+        </div>
         <img class="w-4 mt-[1px]" src="/assets/icon-arrow-down.svg" alt="" />
       </button>
 
       <button
-        class="flex gap-3 items-center bg-purple-1 py-1.5 px-3 rounded-full"
+        class="flex gap-3 items-center bg-purple-1 py-1.5 pl-1.5 pr-3 rounded-full"
       >
         <div class="w-8 h-8 rounded-full bg-white grid place-content-center">
           <img class="w-4 h-4" src="/assets/icon-plus.svg" alt="" />
         </div>
-        <span class="font-semibold text-white">New Invoice</span>
+        <div class="flex gap-1">
+          <span class="font-semibold text-white">New</span>
+          <span class="font-semibold text-white max-md:hidden">Invoice</span>
+        </div>
       </button>
     </div>
   </div>
-  <!-- invoices -->
-  <section
-    class="flex justify-between items-center mt-14 h-20 px-8 shadow-lg rounded-lg bg-white dark:bg-darkblue-2"
-  >
-    <!-- <div class="flex gap-14 items-center"> -->
-    <h1 class="text-lg font-bold">
-      <span class="text-grey-3">#</span>
-      <span class="text-black-1 dark:text-white">RT3080</span>
-    </h1>
-    <p class="text-grey-2">Due 19 Aug 2021</p>
-    <p class="text-grey-3 dark:text-white">Jensen Huang</p>
-    <!-- </div> -->
-    <!-- <div class="flex gap-14 items-center"> -->
-    <p class="text-black-1 font-extrabold dark:text-white">£ 1,800.90</p>
-    <div class="flex items-center gap-2 py-2 px-5 rounded-lg relative">
-      <div
-        class="absolute w-full h-full top-0 left-0 bg-green-1 opacity-10 rounded-lg"
-      ></div>
-      <div class="w-2 h-2 rounded-full bg-green-1 z-20"></div>
-      <p class="text-green-1 font-bold z-20">Paid</p>
-    </div>
-    <!-- </div> -->
-  </section>
+  <div class="mt-16">
+    <app-invoice-card></app-invoice-card>
+    <app-invoice-card></app-invoice-card>
+    <app-invoice-card></app-invoice-card>
+  </div>
 </section>
