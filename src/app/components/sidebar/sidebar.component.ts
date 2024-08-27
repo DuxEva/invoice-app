@@ -1,5 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  Renderer2,
+} from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +15,10 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 export class SidebarComponent implements OnInit {
   darkMode = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -18,17 +27,13 @@ export class SidebarComponent implements OnInit {
   }
 
   applyThemePreference() {
-    const savedTheme = localStorage.getItem('theme');
-    if (
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    this.darkMode =
       savedTheme === 'dark' ||
-      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      this.darkMode = true;
-      this.updateDarkModeClass(true);
-    } else {
-      this.darkMode = false;
-      this.updateDarkModeClass(false);
-    }
+      (!savedTheme &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    this.updateDarkModeClass(this.darkMode);
   }
 
   toggleDarkMode() {
@@ -39,9 +44,9 @@ export class SidebarComponent implements OnInit {
 
   private updateDarkModeClass(isDarkMode: boolean) {
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      this.renderer.addClass(document.documentElement, 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      this.renderer.removeClass(document.documentElement, 'dark');
     }
   }
 }

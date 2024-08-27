@@ -7,14 +7,14 @@
       <div class="grid place-content-center">
         <button (click)="toggleDarkMode()">
           <img
-            *ngIf="!darkMode"
-            class="w-6 h-6 transition-all duration-300 ease-in-out"
+            *ngIf="darkMode"
+            class="w-5 h-5 transition-all duration-300 ease-in-out"
             src="/assets/icon-sun.svg"
             alt=""
           />
           <img
-            *ngIf="darkMode"
-            class="w-6 h-6 transition-all duration-300 ease-in-out"
+            *ngIf="!darkMode"
+            class="w-5 h-5 transition-all duration-300 ease-in-out"
             src="/assets/icon-moon.svg"
             alt=""
           />
