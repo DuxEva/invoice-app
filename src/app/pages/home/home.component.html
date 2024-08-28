@@ -28,8 +28,9 @@
     </div>
   </div>
   <div class="mt-16">
-    <app-invoice-card></app-invoice-card>
-    <app-invoice-card></app-invoice-card>
-    <app-invoice-card></app-invoice-card>
+    <app-invoice-card
+      *ngFor="let invoice of invoices$ | async"
+      [invoice]="invoice"
+    ></app-invoice-card>
   </div>
 </section>

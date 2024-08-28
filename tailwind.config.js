@@ -30,6 +30,9 @@ module.exports = {
         green: {
           1: "#33D69F",
         },
+        yellow: {
+          1: "#FF8F00",
+        },
       },
     },
   },
