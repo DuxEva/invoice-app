@@ -3,7 +3,9 @@
   <div class="flex gap-7 items-center justify-between">
     <div class="flex flex-col gap-[1px] dark:text-white">
       <h1 class="text-lg md:text-xl font-extrabold">Invoices</h1>
-      <p class="font-thin text-sm text-grey-3">No invoices</p>
+      <p class="font-thin text-sm text-grey-3">
+        {{ (invoices$ | async)?.length ? 'There are ' + (invoices$ | async)?.length + ' invoices' : 'No invoices' }}
+      </p>
     </div>
     <div class="flex gap-16 max-md:gap-4">
       <button class="flex gap-2 items-center dark:text-white">

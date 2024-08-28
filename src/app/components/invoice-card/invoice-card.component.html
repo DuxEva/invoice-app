@@ -34,9 +34,16 @@
     ${{ invoice.total }}
   </p>
   <div class="flex gap-8 items-center max-md:-mt-5 max-md:justify-end">
-    <div class="flex items-center gap-2 py-2 px-5 rounded-lg relative">
+    <div
+      class="flex items-center justify-center gap-2 py-2 rounded-lg relative w-28"
+    >
       <div
-        class="absolute w-full h-full top-0 left-0 bg-green-1 opacity-10 rounded-lg"
+        class="absolute w-full h-full top-0 left-0 opacity-10 rounded-lg"
+        [ngClass]="{
+          'bg-red-1': invoice.status === 'pending',
+          'bg-green-1': invoice.status === 'paid',
+          'bg-yellow-1': invoice.status === 'draft'
+        }"
       ></div>
       <div
         class="w-2 h-2 rounded-full z-20"
