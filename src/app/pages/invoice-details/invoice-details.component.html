@@ -1,0 +1,135 @@
+<section class="w-full space-y-7">
+  <div class="">
+    <div class="mb-6">
+      <a
+        routerLink="/"
+        class="flex items-center gap-4 text-purple-3 font-bold text-xl mb-8"
+      >
+        <img class="h-4" src="/assets/icon-arrow-left.svg" alt="" />
+        <span>Go back</span>
+      </a>
+
+      <div
+        class="w-full flex justify-between items-center bg-white dark:bg-darkblue-1 py-5 px-8 rounded-lg"
+      >
+        <div class="flex items-center gap-8">
+          <h1 class="text-grey-3 text-xl">Status</h1>
+          <app-invoice-status [invoice]="invoice"></app-invoice-status>
+        </div>
+        <div class="flex gap-4">
+          <app-button
+            [text]="'Edit'"
+            [textColor]="' text-grey-3 dark:text-white'"
+            [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
+            [width]="'w-auto'"
+            [borderRadius]="'rounded-full'"
+          ></app-button>
+          <app-button
+            [text]="'Delete'"
+            [textColor]="'text-white'"
+            [backgroundColor]="'bg-red-1'"
+            [width]="'w-auto'"
+            [borderRadius]="'rounded-full'"
+          ></app-button>
+          <app-button
+            [text]="'Mark as Paid'"
+            [textColor]="'text-white'"
+            [backgroundColor]="'bg-purple-1'"
+            [width]="'w-auto'"
+            [borderRadius]="'rounded-full'"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="w-full rounded-2xl min-h-72 bg-white dark:bg-darkblue-1 p-10">
+      <div class="flex justify-between w-full">
+        <div class="flex flex-col gap-2">
+          <h1 class="text-lg font-bold">
+            <span class="text-grey-3"> # </span
+            ><span class="text-black-1 dark:text-white">{{ invoice.id }}</span>
+          </h1>
+          <p class="text-purple-3">{{ invoice.createdAt }}</p>
+        </div>
+        <div class="flex flex-col gap-2 text-end text-grey-3">
+          <p>{{ invoice.senderAddress.street }}</p>
+          <p>{{ invoice.clientAddress.city }}</p>
+          <p>{{ invoice.clientAddress.postCode }}</p>
+          <p>{{ invoice.clientAddress.country }}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <h2 class="text-purple-3 text-lg">Invoice Date</h2>
+            <p class="text-black-1 dark:text-white text-xl font-bold">
+              {{ invoice.createdAt }}
+            </p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-purple-3 text-lg">Payment Due</h2>
+            <p class="text-black-1 dark:text-white text-xl font-bold">
+              {{ invoice.paymentDue }}
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <h2 class="text-purple-3 text-lg">Bill To</h2>
+          <p class="text-xl font-bold text-black-1 dark:text-white mt-[3px]">
+            {{ invoice.clientName }}
+          </p>
+          <div class="text-purple-3 flex flex-col gap-1 mt-3 text-sm">
+            <p>{{ invoice.clientAddress.street }}</p>
+            <p>{{ invoice.clientAddress.city }}</p>
+            <p>{{ invoice.clientAddress.postCode }}</p>
+            <p>{{ invoice.clientAddress.country }}</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-[3px]">
+          <h2 class="text-purple-3 text-lg">Sent to</h2>
+          <p class="text-black-1 dark:text-white text-xl font-bold">
+            {{ invoice.clientEmail }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="mt-10 rounded-xl bg-grey-1 dark:bg-darkblue-2 pt-8 w-full flex justify-center"
+      >
+        <div class="w-full flex flex-col justify-center">
+          <div class="flex justify-center">
+            <div class="flex flex-col justify-between w-[90%]">
+              <div
+                class="grid grid-cols-5 space-x-16 w-full text-purple-3 text-lg"
+              >
+                <h2 class="col-span-2">Item Name</h2>
+
+                <h2>Qty.</h2>
+
+                <h2>Price</h2>
+
+                <h2>Total</h2>
+              </div>
+              <app-invoice-item-card
+                [invoice]="invoice"
+              ></app-invoice-item-card>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex justify-center mt-8 py-8 px w-full rounded-b-xl bg-darkblue-2 dark:bg-black-1"
+            >
+              <div class="flex justify-between w-[90%]">
+                <h2 class="text-white font-light text-lg col-span-4">
+                  Amount Due
+                </h2>
+                <h2 class="text-white font-bold text-xl text-center w-40">
+                  £ {{ invoice.total }}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

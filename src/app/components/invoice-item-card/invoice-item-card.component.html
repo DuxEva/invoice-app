@@ -1,0 +1,16 @@
+@if (invoice.items.length > 0) {
+<div
+  class="grid grid-cols-5 space-x-16 mt-8 text-purple-3  text-lg"
+  *ngFor="let item of invoice.items"
+>
+  <h2 class="font-bold text-lg text-black-1 dark:text-white col-span-2">
+    {{ item.name }}
+  </h2>
+  <h2>{{ item.quantity }}</h2>
+  <h2>£ {{ item.price }}</h2>
+  <h2 class="font-bold text-lg text-black-1 dark:text-white">
+    £ {{ item.total }}
+  </h2>
+</div>
+
+}

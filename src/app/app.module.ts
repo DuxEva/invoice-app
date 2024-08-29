@@ -15,6 +15,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { invoiceReducer } from './store/invoice/invoice.reducer';
 import { InvoiceEffects } from './store/invoice/invoice.effect';
 import { HttpClientModule } from '@angular/common/http';
+import { InvoiceDetailsComponent } from './pages/invoice-details/invoice-details.component';
+import { InvoiceStatusComponent } from './components/invoice-status/invoice-status.component';
+import { ButtonComponent } from './components/button/button.component';
+import { InvoiceItemCardComponent } from './components/invoice-item-card/invoice-item-card.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     SidebarComponent,
     HomeComponent,
     InvoiceCardComponent,
+    InvoiceDetailsComponent,
+    InvoiceStatusComponent,
+    ButtonComponent,
+    InvoiceItemCardComponent,
   ],
   imports: [
     BrowserModule,

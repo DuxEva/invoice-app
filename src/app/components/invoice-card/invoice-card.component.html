@@ -1,9 +1,8 @@
-<!-- invoices -->
-<section
-  class="grid grid-cols-5 max-md:grid-cols-2 place-content-center mb-5 min-h-20 p-4 lg:pl-12 shadow-lg rounded-lg bg-white dark:bg-darkblue-2"
+<a
+  routerLink="/invoices/{{ invoice.id }}"
+  class="grid grid-cols-5 max-md:grid-cols-2 place-content-center mb-5 min-h-20 p-4 lg:pl-12 shadow-lg rounded-lg bg-white dark:bg-darkblue-2 cursor-pointer hover:border-2 hover:border-purple-1"
   *ngIf="invoice"
 >
-  <!-- <div class="flex gap-14 items-center"> -->
   <h1 class="text-lg font-bold max-md:col-span-1">
     <span class="text-grey-3">#</span>
     <span class="text-black-1 dark:text-white">{{ invoice.id }}</span>
@@ -28,45 +27,13 @@
     {{ invoice.createdAt }}
   </p>
 
-  <!-- </div> -->
-  <!-- <div class="flex gap-14 items-center"> -->
   <p class="text-black-1 font-extrabold dark:text-white">
     £ {{ invoice.total | number : "1.2-2" }}
   </p>
   <div class="flex gap-8 items-center max-md:-mt-5 max-md:justify-end">
-    <div
-      class="flex items-center justify-center gap-2 py-2 rounded-lg relative w-28"
-    >
-      <div
-        class="absolute w-full h-full top-0 left-0 opacity-10 rounded-lg"
-        [ngClass]="{
-          'bg-red-1': invoice.status === 'pending',
-          'bg-green-1': invoice.status === 'paid',
-          'bg-yellow-1': invoice.status === 'draft'
-        }"
-      ></div>
-      <div
-        class="w-2 h-2 rounded-full z-20"
-        [ngClass]="{
-          'bg-red-1 text-red-1': invoice.status === 'pending',
-          'bg-green-1': invoice.status === 'paid',
-          'bg-yellow-1 text-yellow-1': invoice.status === 'draft'
-        }"
-      ></div>
-      <p
-        class="text-green-1 font-bold z-20"
-        [ngClass]="{
-          ' text-red-1': invoice.status === 'pending',
-          'text-green-1': invoice.status === 'paid',
-          ' text-yellow-1': invoice.status === 'draft'
-        }"
-      >
-        {{ invoice.status }}
-      </p>
-    </div>
+    <app-invoice-status [invoice]="invoice"></app-invoice-status>
     <button class="max-md:hidden">
       <img class="h-4" src="/assets/icon-arrow-right.svg" alt="" />
     </button>
   </div>
-  <!-- </div> -->
-</section>
+</a>
