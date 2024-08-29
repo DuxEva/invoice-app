@@ -1,22 +1,24 @@
-<section class="w-full space-y-7">
+<section class="w-full space-y-7 overflow-y-auto max-sm:mb-28">
   <div class="">
     <div class="mb-6">
       <a
         routerLink="/"
-        class="flex items-center gap-4 text-purple-3 font-bold text-xl mb-8"
+        class="flex items-center gap-4 text-purple-3 font-bold text-xl mb-7"
       >
         <img class="h-4" src="/assets/icon-arrow-left.svg" alt="" />
         <span>Go back</span>
       </a>
 
       <div
-        class="w-full flex justify-between items-center bg-white dark:bg-darkblue-1 py-5 px-8 rounded-lg"
+        class="w-full flex justify-between items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 rounded-lg"
       >
-        <div class="flex items-center gap-8">
+        <div
+          class="flex items-center gap-8 max-sm:w-full max-sm:justify-between"
+        >
           <h1 class="text-grey-3 text-xl">Status</h1>
           <app-invoice-status [invoice]="invoice"></app-invoice-status>
         </div>
-        <div class="flex gap-4">
+        <div class="flex gap-4 max-sm:hidden">
           <app-button
             [text]="'Edit'"
             [textColor]="' text-grey-3 dark:text-white'"
@@ -41,23 +43,27 @@
         </div>
       </div>
     </div>
-    <div class="w-full rounded-2xl min-h-72 bg-white dark:bg-darkblue-1 p-10">
-      <div class="flex justify-between w-full">
-        <div class="flex flex-col gap-2">
+    <div
+      class="w-full rounded-2xl bg-white dark:bg-darkblue-1 px-10 max-md:px-3 py-7"
+    >
+      <div class="flex max-sm:flex-col justify-between w-full">
+        <div class="flex flex-col gap-2 mx-sm:w-full">
           <h1 class="text-lg font-bold">
             <span class="text-grey-3"> # </span
             ><span class="text-black-1 dark:text-white">{{ invoice.id }}</span>
           </h1>
           <p class="text-purple-3">{{ invoice.createdAt }}</p>
         </div>
-        <div class="flex flex-col gap-2 text-end text-grey-3">
+        <div
+          class="flex flex-col gap-2 text-end max-sm:text-start max-sm:mt-8 text-grey-3"
+        >
           <p>{{ invoice.senderAddress.street }}</p>
           <p>{{ invoice.clientAddress.city }}</p>
           <p>{{ invoice.clientAddress.postCode }}</p>
           <p>{{ invoice.clientAddress.country }}</p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      <div class="grid max-sm:grid-cols-2 grid-cols-3 gap-8 mt-4 max-sm:mt-8">
         <div class="flex flex-col gap-4">
           <div class="flex flex-col gap-1">
             <h2 class="text-purple-3 text-lg">Invoice Date</h2>
@@ -93,15 +99,15 @@
       </div>
 
       <div
-        class="mt-10 rounded-xl bg-grey-1 dark:bg-darkblue-2 pt-8 w-full flex justify-center"
+        class="mt-10 rounded-xl bg-grey-1 dark:bg-darkblue-2 pt-5 w-full flex justify-center"
       >
         <div class="w-full flex flex-col justify-center">
           <div class="flex justify-center">
             <div class="flex flex-col justify-between w-[90%]">
               <div
-                class="grid grid-cols-5 space-x-16 w-full text-purple-3 text-lg"
+                class="grid grid-cols-5 space-x-16 w-full text-purple-3 text-lg max-sm:hidden"
               >
-                <h2 class="col-span-2">Item Name</h2>
+                <h2 class="col-span-2 max-md:col-span-1">Item Name</h2>
 
                 <h2>Qty.</h2>
 
@@ -133,3 +139,31 @@
     </div>
   </div>
 </section>
+
+<div
+  class="hidden bottom-0 left-0 fixed w-screen z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex"
+>
+  <div class="flex gap-3 justify-between">
+    <app-button
+      [text]="'Edit'"
+      [textColor]="' text-grey-3 dark:text-white'"
+      [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
+      [width]="'w-20'"
+      [borderRadius]="'rounded-full'"
+    ></app-button>
+    <app-button
+      [text]="'Delete'"
+      [textColor]="'text-white'"
+      [backgroundColor]="'bg-red-1'"
+      [width]="'w-28'"
+      [borderRadius]="'rounded-full'"
+    ></app-button>
+    <app-button
+      [text]="'Mark as Paid'"
+      [textColor]="'text-white'"
+      [backgroundColor]="'bg-purple-1'"
+      [width]="'w-32'"
+      [borderRadius]="'rounded-full'"
+    ></app-button>
+  </div>
+</div>

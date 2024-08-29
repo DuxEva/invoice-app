@@ -1,16 +1,41 @@
-@if (invoice.items.length > 0) {
+<!-- @if (invoice.items.length > 0) {
 <div
-  class="grid grid-cols-5 space-x-16 mt-8 text-purple-3  text-lg"
+  class="grid grid-cols-5 max-sm:grid-col-2 max-md:grid-cols-4 space-x-16 max-md:space-x-10 mt-8 text-purple-3 text-lg"
   *ngFor="let item of invoice.items"
 >
-  <h2 class="font-bold text-lg text-black-1 dark:text-white col-span-2">
+  <h2
+    class="font-bold text-lg text-black-1 dark:text-white col-span-2 max-md:col-span-1"
+  >
     {{ item.name }}
   </h2>
-  <h2>{{ item.quantity }}</h2>
-  <h2>£ {{ item.price }}</h2>
+  <h2 class="max-sm:hidden">{{ item.quantity }}</h2>
+  <h2 class="max-sm:col-span-1">£{{ item.price }}</h2>
   <h2 class="font-bold text-lg text-black-1 dark:text-white">
-    £ {{ item.total }}
+    £{{ item.total }}
   </h2>
 </div>
 
-}
+} -->
+
+<div
+  class="grid grid-cols-5 max-sm:grid-cols-2 max-md:grid-cols-4 space-x-16 max-md:space-x-0 mt-8 text-purple-3 text-lg"
+  *ngFor="let item of invoice.items"
+>
+  <h2
+    class="font-bold text-lg text-black-1 dark:text-white col-span-2 max-md:col-span-1 max-sm:hidden"
+  >
+    {{ item.name }}
+  </h2>
+  <h2
+    class="hidden font-bold text-lg text-black-1 dark:text-white col-span-2 max-sm:col-span-2 max-sm:block"
+  >
+    {{ item.name }}
+  </h2>
+  <h2 class="max-sm:hidden max-sm:col-span-1">{{ item.quantity }}</h2>
+  <h2 class="max-sm:col-span-1">£{{ item.price }}</h2>
+  <h2
+    class="font-bold text-lg text-black-1 dark:text-white max-sm:-mt-3 max-sm:text-end"
+  >
+    £{{ item.total }}
+  </h2>
+</div>
