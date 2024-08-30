@@ -34,10 +34,16 @@
             "
             class="text-red"
           >
-            <small *ngIf="addressForm.get('street')?.errors?.['required']">
+            <small
+              class="danger"
+              *ngIf="addressForm.get('street')?.errors?.['required']"
+            >
               Street address is required.
             </small>
-            <small *ngIf="addressForm.get('street')?.errors?.['minlength']">
+            <small
+              class="danger"
+              *ngIf="addressForm.get('street')?.errors?.['minlength']"
+            >
               Street address must be at least 5 characters long.
             </small>
           </div>
@@ -60,7 +66,10 @@
               "
               class="text-red"
             >
-              <small *ngIf="addressForm.get('city')?.errors?.['required']">
+              <small
+                class="danger"
+                *ngIf="addressForm.get('city')?.errors?.['required']"
+              >
                 City is required.
               </small>
             </div>
@@ -85,11 +94,15 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('postalCode')?.errors?.['required']"
               >
                 Postal code is required.
               </small>
-              <small *ngIf="addressForm.get('postalCode')?.errors?.['pattern']">
+              <small
+                class="danger"
+                *ngIf="addressForm.get('postalCode')?.errors?.['pattern']"
+              >
                 Code must be a 5-digit number.
               </small>
             </div>
@@ -111,7 +124,10 @@
               "
               class="text-red"
             >
-              <small *ngIf="addressForm.get('county')?.errors?.['required']">
+              <small
+                class="danger"
+                *ngIf="addressForm.get('county')?.errors?.['required']"
+              >
                 County is required.
               </small>
             </div>
@@ -141,7 +157,10 @@
             "
             class="text-red"
           >
-            <small *ngIf="addressForm.get('clientName')?.errors?.['required']">
+            <small
+              class="danger"
+              *ngIf="addressForm.get('clientName')?.errors?.['required']"
+            >
               Name is required.
             </small>
           </div>
@@ -165,7 +184,10 @@
             "
             class="text-red"
           >
-            <small *ngIf="addressForm.get('clientEmail')?.errors?.['required']">
+            <small
+              class="danger"
+              *ngIf="addressForm.get('clientEmail')?.errors?.['required']"
+            >
               Email is required.
             </small>
           </div>
@@ -190,6 +212,7 @@
             class="text-red"
           >
             <small
+              class="danger"
               *ngIf="addressForm.get('clientAddress')?.errors?.['required']"
             >
               Address is required.
@@ -217,6 +240,7 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('clientCity')?.errors?.['required']"
               >
                 City is required.
@@ -243,11 +267,13 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('clientPostalCode')?.errors?.['required']"
               >
                 Postal code is required.
               </small>
               <small
+                class="danger"
                 *ngIf="addressForm.get('clientPostalCode')?.errors?.['pattern']"
               >
                 Code must be a 5-digit number.
@@ -274,6 +300,7 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('clientCountry')?.errors?.['required']"
               >
                 County is required.
@@ -303,6 +330,7 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('invoiceDate')?.errors?.['required']"
               >
                 Invoice date is required.
@@ -333,6 +361,7 @@
               class="text-red"
             >
               <small
+                class="danger"
                 *ngIf="addressForm.get('paymentTerms')?.errors?.['required']"
               >
                 Terms is required.
@@ -361,6 +390,7 @@
           class="text-red"
         >
           <small
+            class="danger"
             *ngIf="addressForm.get('projectDescription')?.errors?.['required']"
           >
             Details is required.

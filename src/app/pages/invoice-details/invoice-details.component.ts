@@ -1,41 +1,42 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Invoice } from '../../model/types.model';
+import { select, Store } from '@ngrx/store';
+import * as InvoiceActions from '../../store/invoice/invoice.actions';
+import { ActivatedRoute } from '@angular/router';
+import {
+  selectError,
+  selectInvoiceById,
+  selectInvoices,
+} from '../../store/invoice/invoice.selector';
 
 @Component({
   selector: 'app-invoice-details',
   templateUrl: './invoice-details.component.html',
   styleUrl: './invoice-details.component.css',
 })
-export class InvoiceDetailsComponent {
-  @Input() invoice: Invoice = {
-    id: 'RT3080',
-    createdAt: '2021-08-18',
-    paymentDue: '2021-08-19',
-    description: 'Re-branding',
-    paymentTerms: 1,
-    clientName: 'Jensen Huang',
-    clientEmail: 'jensenh@mail.com',
-    status: 'paid',
-    senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
-    },
-    clientAddress: {
-      street: '106 Kendell Street',
-      city: 'Sharrington',
-      postCode: 'NR24 5WQ',
-      country: 'United Kingdom',
-    },
-    items: [
-      {
-        name: 'Brand Guidelines',
-        quantity: 1,
-        price: 1800.9,
-        total: 1800.9,
-      },
-    ],
-    total: 1800.9,
-  };
+export class InvoiceDetailsComponent implements OnInit, AfterViewInit {
+  invoice: Invoice | undefined;
+
+  constructor(private store: Store, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.store.dispatch(InvoiceActions.loadInvoices());
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.store.pipe(select(selectInvoiceById(id))).subscribe((invoice) => {
+        this.invoice = invoice;
+      });
+    }
+  }
+
+  ngAfterViewInit() {
+    if (!this.invoice) {
+      this.store.dispatch(
+        InvoiceActions.loadInvoicesFailure({ error: 'Invoice not found' })
+      );
+      this.store.pipe(select(selectError)).subscribe((error) => {
+        console.log(error);
+      });
+    }
+  }
 }

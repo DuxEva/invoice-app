@@ -1,5 +1,6 @@
 <section
   class="w-full space-y-7 overflow-y-auto max-sm:mb-28 transition-all duration-300 ease-in-out"
+  *ngIf="invoice"
 >
   <div class="">
     <div class="mb-6">
@@ -54,7 +55,7 @@
             <span class="text-grey-3"> # </span
             ><span class="text-black-1 dark:text-white">{{ invoice.id }}</span>
           </h1>
-          <p class="text-purple-3">{{ invoice.createdAt }}</p>
+          <p class="text-purple-3">{{ invoice.clientName }}</p>
         </div>
         <div
           class="flex flex-col gap-2 text-end max-sm:text-start max-sm:mt-8 text-grey-3"

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class NewInvoiceFormComponent {
   addressForm!: FormGroup;
-  isOpen = true;
+  isOpen = false;
 
   constructor(private fb: FormBuilder) {
     this.createForm();

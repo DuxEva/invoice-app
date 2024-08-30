@@ -12,7 +12,6 @@ export class InvoiceService {
   constructor(private http: HttpClient) {}
 
   getInvoices(): Observable<Invoice[]> {
-    console.log('getInvoices', this.http.get<Invoice[]>(this.URL));
     return this.http.get<Invoice[]>(this.URL);
   }
 }

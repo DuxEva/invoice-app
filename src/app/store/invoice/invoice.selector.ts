@@ -12,3 +12,13 @@ export const selectInvoices = createSelector(
   selectInvoiceState,
   (state) => state.invoices.invoices
 );
+
+export const selectInvoiceById = (id: string) =>
+  createSelector(selectInvoices, (invoices) =>
+    invoices.find((invoice) => invoice.id === id)
+  );
+
+export const selectError = createSelector(
+  selectInvoiceState,
+  (state) => state.invoices.error
+);
