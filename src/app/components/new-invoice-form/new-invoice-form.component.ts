@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class NewInvoiceFormComponent {
   addressForm!: FormGroup;
+  isOpen = true;
 
   constructor(private fb: FormBuilder) {
     this.createForm();

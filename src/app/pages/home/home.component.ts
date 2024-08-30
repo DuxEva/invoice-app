@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Invoice } from '../../model/types.model';
@@ -13,6 +13,7 @@ import { AppState } from '../../model/types.model';
 })
 export class HomeComponent implements OnInit {
   invoices$!: Observable<Invoice[]>;
+  @Input() isOpen = false;
 
   constructor(private store: Store<AppState>) {}
 

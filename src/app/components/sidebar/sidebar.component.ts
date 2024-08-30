@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Inject,
+  Input,
   OnInit,
   PLATFORM_ID,
   Renderer2,
