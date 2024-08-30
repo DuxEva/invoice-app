@@ -13,7 +13,10 @@
     {{ item.name }}
   </h2>
   <h2 class="max-sm:hidden max-sm:col-span-1">{{ item.quantity }}</h2>
-  <h2 class="max-sm:col-span-1">£{{ item.price }}</h2>
+  <h2 class="max-sm:col-span-1">
+    <span class="hidden max-sm:inline-block">{{ item.quantity }} x</span>
+    £{{ item.price }}
+  </h2>
   <h2
     class="font-bold text-lg text-black-1 dark:text-white max-sm:-mt-3 max-sm:text-end"
   >

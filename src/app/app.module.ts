@@ -19,6 +19,9 @@ import { InvoiceDetailsComponent } from './pages/invoice-details/invoice-details
 import { InvoiceStatusComponent } from './components/invoice-status/invoice-status.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InvoiceItemCardComponent } from './components/invoice-item-card/invoice-item-card.component';
+import { NewInvoiceFormComponent } from './components/new-invoice-form/new-invoice-form.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,11 +33,15 @@ import { InvoiceItemCardComponent } from './components/invoice-item-card/invoice
     InvoiceStatusComponent,
     ButtonComponent,
     InvoiceItemCardComponent,
+    NewInvoiceFormComponent,
+    ItemListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ invoice: invoiceReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

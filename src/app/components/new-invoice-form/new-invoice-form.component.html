@@ -1,0 +1,358 @@
+<div
+  class="w-full flex flex-col gap-6 !h-screen pl-1 pr-2 scrollbar-thin p-6 bg-white dark:bg-black-2 rounded-r-2xl overflow-y-auto custom-scroll transition-all duration-300 ease-in-out"
+>
+  <form
+    [formGroup]="addressForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-6"
+  >
+    <!--    Bill form-->
+    <div class="flex flex-col items-start gap-4">
+      <h2 class="text-purple-1 text-xl font-semibold">Bill form</h2>
+      <!--    Street-->
+      <div class="flex flex-col gap-1 w-full">
+        <label for="street" class="font-semibold text-grey-3"
+          >Street Address</label
+        >
+        <input
+          id="street"
+          formControlName="street"
+          placeholder="Street Address"
+          class="input-field"
+        />
+        <div
+          *ngIf="
+            addressForm.get('street')?.invalid &&
+            addressForm.get('street')?.touched
+          "
+          class="text-red"
+        >
+          <small *ngIf="addressForm.get('street')?.errors?.['required']">
+            Street address is required.
+          </small>
+          <small *ngIf="addressForm.get('street')?.errors?.['minlength']">
+            Street address must be at least 5 characters long.
+          </small>
+        </div>
+      </div>
+
+      <div class="grid gap-4 grid-cols-1 lg:grid-cols-3 w-full">
+        <!--      City-->
+        <div class="flex flex-col gap-1">
+          <label for="city" class="font-semibold text-grey-3">City</label>
+          <input
+            id="city"
+            formControlName="city"
+            placeholder="City"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('city')?.invalid &&
+              addressForm.get('city')?.touched
+            "
+            class="text-red"
+          >
+            <small *ngIf="addressForm.get('city')?.errors?.['required']">
+              City is required.
+            </small>
+          </div>
+        </div>
+
+        <!--      PostalCode-->
+        <div class="flex flex-col gap-1">
+          <label for="postalCode" class="font-semibold text-grey-3"
+            >Postal Code</label
+          >
+          <input
+            id="postalCode"
+            formControlName="postalCode"
+            placeholder="Postal Code"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('postalCode')?.invalid &&
+              addressForm.get('postalCode')?.touched
+            "
+            class="text-red"
+          >
+            <small *ngIf="addressForm.get('postalCode')?.errors?.['required']">
+              Postal code is required.
+            </small>
+            <small *ngIf="addressForm.get('postalCode')?.errors?.['pattern']">
+              Code must be a 5-digit number.
+            </small>
+          </div>
+        </div>
+
+        <!--      Country-->
+        <div class="flex flex-col gap-1">
+          <label for="county" class="font-semibold text-grey-3">County</label>
+          <input
+            id="county"
+            formControlName="county"
+            placeholder="County"
+            class="border border-grey-3 dark:border-darkblue-2 p-2 font-medium rounded-md text-black-1 dark:text-white dark:bg-darkblue-2 outline-none"
+          />
+          <div
+            *ngIf="
+              addressForm.get('county')?.invalid &&
+              addressForm.get('county')?.touched
+            "
+            class="text-red"
+          >
+            <small *ngIf="addressForm.get('county')?.errors?.['required']">
+              County is required.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--    Bill To-->
+    <div class="flex flex-col items-start gap-4">
+      <h2 class="text-purple-1 text-xl font-semibold">Bill To</h2>
+
+      <!--    Client Name-->
+      <div class="flex flex-col gap-1 w-full">
+        <label for="street" class="font-semibold text-grey-3"
+          >Client's name</label
+        >
+        <input
+          id="clientName"
+          formControlName="clientName"
+          placeholder="Alex Grim"
+          class="input-field"
+        />
+        <div
+          *ngIf="
+            addressForm.get('clientName')?.invalid &&
+            addressForm.get('clientName')?.touched
+          "
+          class="text-red"
+        >
+          <small *ngIf="addressForm.get('clientName')?.errors?.['required']">
+            Name is required.
+          </small>
+        </div>
+      </div>
+
+      <!--      Client email-->
+      <div class="flex flex-col gap-1 w-full">
+        <label for="clientEmail" class="font-semibold text-grey-3"
+          >Client's Email</label
+        >
+        <input
+          id="clientEmail"
+          formControlName="clientEmail"
+          placeholder="alexgrim@gmail.com"
+          class="input-field"
+        />
+        <div
+          *ngIf="
+            addressForm.get('clientEmail')?.invalid &&
+            addressForm.get('clientEmail')?.touched
+          "
+          class="text-red"
+        >
+          <small *ngIf="addressForm.get('clientEmail')?.errors?.['required']">
+            Email is required.
+          </small>
+        </div>
+      </div>
+
+      <!--      Client Address-->
+      <div class="flex flex-col gap-1 w-full">
+        <label for="clientAddress" class="font-semibold text-grey-3"
+          >Client's Address</label
+        >
+        <input
+          id="clientAddress"
+          formControlName="clientAddress"
+          placeholder="alexgrim@gmail.com"
+          class="input-field"
+        />
+        <div
+          *ngIf="
+            addressForm.get('clientAddress')?.invalid &&
+            addressForm.get('clientAddress')?.touched
+          "
+          class="text-red"
+        >
+          <small *ngIf="addressForm.get('clientAddress')?.errors?.['required']">
+            Address is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="grid gap-4 grid-cols-1 lg:grid-cols-3 w-full">
+        <!--      City-->
+        <div class="flex flex-col gap-1">
+          <label for="clientCity" class="font-semibold text-grey-3">City</label>
+          <input
+            id="clientCity"
+            formControlName="clientCity"
+            placeholder="Bradford"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('clientCity')?.invalid &&
+              addressForm.get('clientCity')?.touched
+            "
+            class="text-red"
+          >
+            <small *ngIf="addressForm.get('clientCity')?.errors?.['required']">
+              City is required.
+            </small>
+          </div>
+        </div>
+
+        <!--      ClientPostalCode-->
+        <div class="flex flex-col gap-1">
+          <label for="clientPostalCode" class="font-semibold text-grey-3"
+            >Postal Code</label
+          >
+          <input
+            id="clientPostalCode"
+            formControlName="clientPostalCode"
+            placeholder="Postal Code"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('clientPostalCode')?.invalid &&
+              addressForm.get('clientPostalCode')?.touched
+            "
+            class="text-red"
+          >
+            <small
+              *ngIf="addressForm.get('clientPostalCode')?.errors?.['required']"
+            >
+              Postal code is required.
+            </small>
+            <small
+              *ngIf="addressForm.get('clientPostalCode')?.errors?.['pattern']"
+            >
+              Code must be a 5-digit number.
+            </small>
+          </div>
+        </div>
+
+        <!--      Country-->
+        <div class="flex flex-col gap-1">
+          <label for="clientCountry" class="font-semibold text-grey-3"
+            >County</label
+          >
+          <input
+            id="clientCountry"
+            formControlName="clientCountry"
+            placeholder="County"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('clientCountry')?.invalid &&
+              addressForm.get('clientCountry')?.touched
+            "
+            class="text-red"
+          >
+            <small
+              *ngIf="addressForm.get('clientCountry')?.errors?.['required']"
+            >
+              County is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-4 grid-cols-2 w-full">
+        <!--      Invoice Date -->
+        <div class="flex flex-col gap-1">
+          <label for="invoiceDate" class="font-semibold text-grey-3"
+            >City</label
+          >
+          <input
+            type="date"
+            id="invoiceDate"
+            formControlName="invoiceDate"
+            placeholder="Bradford"
+            class="input-field"
+          />
+          <div
+            *ngIf="
+              addressForm.get('invoiceDate')?.invalid &&
+              addressForm.get('invoiceDate')?.touched
+            "
+            class="text-red"
+          >
+            <small *ngIf="addressForm.get('invoiceDate')?.errors?.['required']">
+              Invoice date is required.
+            </small>
+          </div>
+        </div>
+
+        <!--      Payment Terms -->
+        <div class="flex flex-col gap-1">
+          <label for="paymentTerms" class="font-semibold text-grey-3"
+            >Payment Terms</label
+          >
+          <select
+            id="paymentTerms"
+            formControlName="paymentTerms"
+            class="border dark:border-darkblue-2 dark:bg-darkblue-2 p-2 py-3 font-medium rounded-md border-grey-3 text-black-1 dark:text-white outline-none"
+          >
+            <option value="1">Next 1 day</option>
+            <option value="7">Next 7 days</option>
+            <option value="14">Next 14 days</option>
+            <option value="30">Next 30 days</option>
+          </select>
+          <div
+            *ngIf="
+              addressForm.get('paymentTerms')?.invalid &&
+              addressForm.get('paymentTerms')?.touched
+            "
+            class="text-red"
+          >
+            <small
+              *ngIf="addressForm.get('paymentTerms')?.errors?.['required']"
+            >
+              Terms is required.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--      Description -->
+    <div class="flex flex-col gap-1">
+      <label for="projectDescription" class="font-semibold text-grey-3"
+        >County</label
+      >
+      <input
+        id="projectDescription"
+        formControlName="projectDescription"
+        placeholder="County"
+        class="input-field"
+      />
+      <div
+        *ngIf="
+          addressForm.get('projectDescription')?.invalid &&
+          addressForm.get('projectDescription')?.touched
+        "
+        class="text-red"
+      >
+        <small
+          *ngIf="addressForm.get('projectDescription')?.errors?.['required']"
+        >
+          Details is required.
+        </small>
+      </div>
+    </div>
+
+    <app-item-list />
+
+    <!--    <button type="submit" [disabled]="addressForm.invalid">Submit</button>-->
+  </form>
+</div>
