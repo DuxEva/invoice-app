@@ -1,10 +1,15 @@
 <div
-  class="flex flex-col lg:flex-row bg-grey-1 dark:bg-black-2 transition-all duration-300 ease-in-out min-h-screen"
+  class="flex flex-col lg:flex-row bg-grey-1 dark:bg-black-2 transition-all duration-300 ease-in-out min-h-screen relative overflow-x-hidden"
 >
   <app-sidebar></app-sidebar>
-  <div class="w-full ml-20 max-">
-    <app-new-invoice-form></app-new-invoice-form>
+  <div
+    class="absolute left-0 top-0 w-full ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] dark:bg-black-2 bg-opacity-50 dark:bg-opacity-5 z-20"
+  >
+    <div class="relative z-20">
+      <app-new-invoice-form></app-new-invoice-form>
+    </div>
   </div>
+
   <section class="w-full flex justify-center pt-10 max-lg:mt-20 max-sm:mt-16">
     <div class="lg:w-[70%] md:w-[90%] max-md:w-[90%]">
       <router-outlet></router-outlet>
