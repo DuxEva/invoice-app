@@ -11,7 +11,7 @@ import * as InvoiceActions from '../../store/invoice/invoice.actions';
 })
 export class HomeComponent implements OnInit {
   invoices$!: Observable<Invoice[]>;
-  isOpen = false;
+  isOpen = true;
 
   constructor(private store: Store<InvoiceState>) {}
 
@@ -23,5 +23,4 @@ export class HomeComponent implements OnInit {
   onToggleForm() {
     this.isOpen = !this.isOpen;
   }
-  
 }

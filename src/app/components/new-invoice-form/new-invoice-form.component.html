@@ -6,12 +6,12 @@
   }"
 >
   <section
-    class="flex flex-col gap-6 !h-screen px-8 max-sm:px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-md:w-2/3 max-sm:w-full relative"
+    class="max-lg:mt-20 flex flex-col gap-6 !h-screen px-8 max-sm:px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full relative"
   >
     <form
       [formGroup]="addressForm"
       (ngSubmit)="onSubmit()"
-      class="flex flex-col gap-6"
+      class="flex flex-col gap-6 mb-32"
     >
       <!--    Bill form-->
       <div class="flex flex-col items-start gap-4">
@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div class="grid gap-4 grid-cols-1 lg:grid-cols-3 w-full">
+        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 w-full">
           <!--      City-->
           <div class="flex flex-col gap-1">
             <label for="city" class="font-semibold text-grey-3">City</label>
@@ -109,13 +109,13 @@
           </div>
 
           <!--      Country-->
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 max-md:col-span-3">
             <label for="county" class="font-semibold text-grey-3">County</label>
             <input
               id="county"
               formControlName="county"
               placeholder="County"
-              class="border border-grey-3 dark:border-darkblue-2 p-2 font-medium rounded-md text-black-1 dark:text-white dark:bg-darkblue-2 outline-none"
+              class="input-field"
             />
             <div
               *ngIf="
@@ -220,7 +220,7 @@
           </div>
         </div>
 
-        <div class="grid gap-4 grid-cols-1 lg:grid-cols-3 w-full">
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 w-full">
           <!--      City-->
           <div class="flex flex-col gap-1">
             <label for="clientCity" class="font-semibold text-grey-3"
@@ -282,7 +282,7 @@
           </div>
 
           <!--      Country-->
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 max-md:col-span-3">
             <label for="clientCountry" class="font-semibold text-grey-3"
               >County</label
             >
@@ -399,8 +399,35 @@
       </div>
 
       <app-item-list />
-
-      <!--    <button type="submit" [disabled]="addressForm.invalid">Submit</button>-->
     </form>
+    <div
+      class="transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full bottom-0 left-0 fixed z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex"
+    >
+      <div class="flex justify-between">
+        <app-button
+          [text]="'Discard'"
+          [textColor]="' text-grey-3 dark:text-white'"
+          [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
+          [width]="'w-24'"
+          [borderRadius]="'rounded-full'"
+        ></app-button>
+        <div class="flex gap-3">
+          <app-button
+            [text]="'Save as Draft'"
+            [textColor]="'text-grey-3'"
+            [backgroundColor]="'bg-grey-4'"
+            [width]="'w-36'"
+            [borderRadius]="'rounded-full'"
+          ></app-button>
+          <app-button
+            [text]="'Save & Send'"
+            [textColor]="'text-white'"
+            [backgroundColor]="'bg-purple-1'"
+            [width]="'w-36'"
+            [borderRadius]="'rounded-full'"
+          ></app-button>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
