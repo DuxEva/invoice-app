@@ -11,12 +11,14 @@ export class ItemListComponent {
     {
       name: 'Banner Design',
       quantity: 1,
-      price: 300,
+      price: 156.0,
+      total: 156.0,
     },
     {
       name: 'Email Design',
-      quantity: 3,
-      price: 412,
+      quantity: 2,
+      price: 200.0,
+      total: 400.0,
     },
   ];
 

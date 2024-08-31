@@ -1,0 +1,33 @@
+<div class="flex w-full gap-3 items-center mb-3" *ngFor="let item of items">
+  <div
+    class="flex flex-col gap-1 w-[40%] md:w-[35%] border-grey-3 text-black-1 dark:text-white bg-white dark:bg-darkblue-2 border p-2 rounded-lg"
+  >
+    {{ item.name }}
+  </div>
+  <div
+    class="flex flex-col gap-1 w-[10%] border-grey-3 text-black-1 dark:text-white bg-white dark:bg-darkblue-2 border p-2 rounded-lg text-center"
+  >
+    {{ item.quantity }}
+  </div>
+  <div
+    class="flex flex-col gap-1 w-[20%] border-grey-3 text-black-1 dark:text-white bg-white dark:bg-darkblue-2 border p-2 rounded-lg text-center"
+  >
+    {{ item.price }}
+  </div>
+  <div
+    class="flex flex-col gap-1 w-[20%] md:w-[25%] border-grey-3 text-black-1 dark:text-white bg-white dark:bg-darkblue-2 border p-2 rounded-lg text-center"
+  >
+    {{ item.quantity * item.price }}
+  </div>
+  <div
+    class="flex flex-col gap-1 w-[10%] scale-90 hover:scale-105 active:scale-95 duration-75 p-2 rounded-xl items-center"
+  >
+    <img
+      src="/assets/icon-delete.svg"
+      alt="delete"
+      width="13"
+      height="16"
+      class="w-4"
+    />
+  </div>
+</div>
