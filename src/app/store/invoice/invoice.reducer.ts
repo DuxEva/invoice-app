@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as InvoiceActions from './invoice.actions';
+import { InvoiceState } from '../../model/types.model';
 
-export const initialState = {
+export const initialState: InvoiceState = {
   invoices: [],
   error: null,
 };

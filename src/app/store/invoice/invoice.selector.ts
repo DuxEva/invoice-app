@@ -4,7 +4,7 @@ import { Invoice } from '../../model/types.model';
 export const selectInvoiceState = createFeatureSelector<{
   invoices: {
     invoices: Invoice[];
-    error: any;
+    error: string | null;
   };
 }>('invoice');
 

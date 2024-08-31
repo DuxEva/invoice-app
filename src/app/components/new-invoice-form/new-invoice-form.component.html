@@ -1,12 +1,12 @@
 <div
-  class="absolute left-0 top-0 w-full lg:ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] dark:bg-black-2 bg-opacity-50 dark:bg-opacity-5 z-20"
+  class="absolute left-0 top-0 w-full lg:ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] bg-opacity-50 dark:bg-opacity-5 z-20 !h-screen overflow-y-hidden"
   [ngClass]="{
-    'translate-x-full transition-transform duration-300 ease-in-out': !isOpen,
-    'translate-x-0': isOpen
+    '-translate-x-full transition-transform duration-300 ease-in-out': !isOpen,
+    'translate-x-0 transition-transform duration-300 ease-in-out': isOpen
   }"
 >
   <section
-    class="flex flex-col gap-6 !h-screen px-8 scrollbar-thin p-6 bg-white dark:bg-black-2 rounded-r-[20px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2"
+    class="flex flex-col gap-6 !h-screen px-8 max-sm:px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-md:w-2/3 max-sm:w-full relative"
   >
     <form
       [formGroup]="addressForm"

@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import {
   selectError,
   selectInvoiceById,
-  selectInvoices,
 } from '../../store/invoice/invoice.selector';
 
 @Component({
