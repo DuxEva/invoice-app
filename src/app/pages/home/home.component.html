@@ -13,7 +13,11 @@
     </div>
     <div class="flex gap-16 max-md:gap-4">
       <div class="relative">
-        <button class="flex gap-2 items-center dark:text-white">
+        <button
+          class="flex gap-2 items-center dark:text-white"
+          (click)="onToggleFilter()"
+          #filterButton
+        >
           <div class="flex gap-1">
             <span class="font-semibold">Filter</span>
             <span class="font-semibold max-md:hidden">By Status</span>
@@ -21,38 +25,39 @@
           <img class="w-4 mt-[1px]" src="/assets/icon-arrow-down.svg" alt="" />
         </button>
         <div
+          #filterDiv
           class="absolute top-12 -left-5 w-48 bg-white dark:bg-darkblue-1 rounded-lg shadow-lg p-4"
-          *ngIf="false"
+          *ngIf="isFilterOpen"
         >
           <form>
-            <label class="flex items-center space-x-2 mb-2">
+            <label class="flex items-center space-x-3 mb-2 cursor-pointer">
               <input
                 type="checkbox"
-                name="filterOption1"
-                value="option1"
-                class="form-checkbox"
+                name="pending"
+                value="pending"
+                class="h-4 w-4 rounded cursor-pointer"
               />
-              <span>Option 1</span>
+              <span class="dark:text-grey-3 text-black-1">Pending</span>
             </label>
 
-            <label class="flex items-center space-x-2 mb-2">
+            <label class="flex items-center space-x-3 mb-2 cursor-pointer">
               <input
                 type="checkbox"
-                name="filterOption2"
-                value="option2"
-                class="form-checkbox"
+                name="paid"
+                value="paid"
+                class="h-4 w-4 rounded cursor-pointer"
               />
-              <span>Option 2</span>
+              <span class="dark:text-grey-3 text-black-1">Paid</span>
             </label>
 
-            <label class="flex items-center space-x-2 mb-2">
+            <label class="flex items-center space-x-3 mb-2 cursor-pointer">
               <input
                 type="checkbox"
-                name="filterOption3"
-                value="option3"
-                class="form-checkbox"
+                name="draft"
+                value="draft"
+                class="h-4 w-4 rounded cursor-pointer"
               />
-              <span>Option 3</span>
+              <span class="dark:text-grey-3 text-black-1">Draft</span>
             </label>
 
             <!-- Add more options as needed -->

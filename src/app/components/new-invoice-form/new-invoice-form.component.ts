@@ -38,6 +38,12 @@ export class NewInvoiceFormComponent {
   onSubmit() {
     if (this.addressForm.valid) {
       console.log('Form Submitted!', this.addressForm.value);
+    } else {
+      console.log('Form is invalid');
     }
+  }
+
+  onCancel() {
+    this.isOpen = false;
   }
 }

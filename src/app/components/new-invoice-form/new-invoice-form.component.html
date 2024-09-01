@@ -410,6 +410,7 @@
           [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
           [width]="'w-24'"
           [borderRadius]="'rounded-full'"
+          (click)="onCancel()"
         ></app-button>
         <div class="flex gap-3">
           <app-button
@@ -418,6 +419,7 @@
             [backgroundColor]="'bg-grey-4'"
             [width]="'w-36'"
             [borderRadius]="'rounded-full'"
+            (click)="onSubmit()"
           ></app-button>
           <app-button
             [text]="'Save & Send'"
@@ -425,6 +427,7 @@
             [backgroundColor]="'bg-purple-1'"
             [width]="'w-36'"
             [borderRadius]="'rounded-full'"
+            (click)="onSubmit()"
           ></app-button>
         </div>
       </div>
