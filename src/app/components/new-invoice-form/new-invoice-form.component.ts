@@ -2,16 +2,17 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../store/invoice/invoice.actions';
-import { Invoice } from '../../model/types.model';
+import { Invoice, Item } from '../../model/types.model';
 
 @Component({
   selector: 'app-new-invoice-form',
   templateUrl: './new-invoice-form.component.html',
-  styleUrl: './new-invoice-form.component.css',
+  styleUrls: ['./new-invoice-form.component.css'],
 })
 export class NewInvoiceFormComponent {
   addressForm!: FormGroup;
   @Input() isOpen = false;
+  items: Item[] = [];
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.createForm();
@@ -19,56 +20,91 @@ export class NewInvoiceFormComponent {
 
   createForm() {
     this.addressForm = this.fb.group({
-      street: ['', [Validators.required, Validators.minLength(5)]],
-      city: ['', [Validators.required]],
-      county: ['', [Validators.required]],
-      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
+      senderStreet: ['', [Validators.required, Validators.minLength(5)]],
+      senderCity: ['', [Validators.required]],
+      senderCountry: ['', [Validators.required]],
+      senderPostalCode: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z0-9]{3}[A-Z0-9 ]{0,3}[A-Z0-9]{3}$'),
+        ],
+      ],
       clientName: ['', [Validators.required]],
       clientEmail: ['', [Validators.required, Validators.email]],
-      clientAddress: ['', [Validators.required]],
+      clientStreet: ['', [Validators.required]],
       clientCity: ['', [Validators.required]],
       clientCountry: ['', [Validators.required]],
       clientPostalCode: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]{5}$')],
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z0-9]{3}[A-Z0-9 ]{0,3}[A-Z0-9]{3}$'),
+        ],
       ],
       invoiceDate: ['', [Validators.required]],
       paymentTerms: ['', [Validators.required]],
-      projectDescription: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
-    const date = new Date();
-    if (this.addressForm.valid) {
+    if (this.items.length !== 0) {
       const newInvoice: Invoice = {
         id: this.generateInvoiceId(),
-        ...this.addressForm.value,
+        createdAt: this.addressForm.value.invoiceDate,
+        paymentDue: this.calculatePaymentDue(),
+        description: this.addressForm.value.description,
+        paymentTerms: this.addressForm.value.paymentTerms,
+        clientName: this.addressForm.value.clientName,
+        clientEmail: this.addressForm.value.clientEmail,
         status: 'pending',
-        createdAt: `${date.getFullYear()}-${(date.getMonth() + 1)
-          .toString()
-          .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`,
-        items: [],
-        total: 0,
+        senderAddress: {
+          street: this.addressForm.value.senderStreet,
+          city: this.addressForm.value.senderCity,
+          postCode: this.addressForm.value.senderPostalCode,
+          country: this.addressForm.value.senderCountry,
+        },
+        clientAddress: {
+          street: this.addressForm.value.clientStreet,
+          city: this.addressForm.value.clientCity,
+          postCode: this.addressForm.value.clientPostalCode,
+          country: this.addressForm.value.clientCountry,
+        },
+        items: this.items,
+        total: this.calculateTotal(),
       };
       this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
-      console.log('New invoice added:', newInvoice);
-      this.addressForm.reset();
-      this.isOpen = false;
+      this.resetForm();
     } else {
-      console.log('Form is invalid');
+      console.error('Form is invalid or no items added');
     }
   }
 
   onCancel() {
+    this.resetForm();
     this.isOpen = false;
-    this.addressForm.reset();
+  }
+
+  addItemToInvoice(item: Item) {
+    if (
+      item &&
+      !this.items.some((existingItem) => existingItem.name === item.name)
+    ) {
+      this.items.push(item);
+    }
+  }
+
+  removeItemFromInvoice(index: number) {
+    if (index >= 0 && index < this.items.length) {
+      this.items.splice(index, 1);
+    }
   }
 
   private generateInvoiceId(): string {
-    const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const firstLetter = letter[Math.floor(Math.random() * 26)];
-    const secondLetter = letter[Math.floor(Math.random() * 26)];
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const firstLetter = letters[Math.floor(Math.random() * 26)];
+    const secondLetter = letters[Math.floor(Math.random() * 26)];
     const prefix = `${firstLetter}${secondLetter}`;
     const numbers = '0123456789';
     const randomPart = Array.from(
@@ -77,5 +113,24 @@ export class NewInvoiceFormComponent {
     ).join('');
     const datePart = new Date().getFullYear().toString().slice(-2);
     return `${prefix}${datePart}${randomPart}`;
+  }
+
+  private calculateTotal(): number {
+    return this.items.reduce((total, item) => total + item.total, 0);
+  }
+
+  private calculatePaymentDue(): string {
+    const invoiceDate = new Date(this.addressForm.value.invoiceDate);
+    invoiceDate.setDate(
+      invoiceDate.getDate() + this.addressForm.value.paymentTerms
+    );
+    return invoiceDate.toISOString().split('T')[0];
+  }
+
+  private resetForm() {
+    this.addressForm.reset();
+    this.items = [];
+    this.addressForm.markAsPristine();
+    this.addressForm.markAsUntouched();
   }
 }

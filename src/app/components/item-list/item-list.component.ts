@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Item } from '../../model/types.model';
 
 @Component({
   selector: 'app-item-list',
@@ -7,22 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './item-list.component.css',
 })
 export class ItemListComponent {
-  items = [
-    {
-      name: 'Banner Design',
-      quantity: 1,
-      price: 156.0,
-      total: 156.0,
-    },
-    {
-      name: 'Email Design',
-      quantity: 2,
-      price: 200.0,
-      total: 400.0,
-    },
-  ];
+  @Output() addItem = new EventEmitter<Item>();
+  @Output() removeItem = new EventEmitter<number>();
 
-  addressForm!: FormGroup;
+  itemForm!: FormGroup;
   isItemFormActive = false;
 
   constructor(private fb: FormBuilder) {
@@ -30,20 +19,33 @@ export class ItemListComponent {
   }
 
   createForm() {
-    this.addressForm = this.fb.group({
+    this.itemForm = this.fb.group({
       name: ['', [Validators.required]],
-      quantity: ['', [Validators.required], Validators.min(1)],
-      price: ['', [Validators.required]],
+      quantity: ['', [Validators.required, Validators.min(1)]],
+      price: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
-  addItem() {
-    if (this.addressForm.valid) {
-      console.log('Form Submitted!', this.addressForm.value);
+  onAddItem() {
+    if (this.itemForm.valid) {
+      const newItem: Item = {
+        name: this.itemForm.value.name,
+        quantity: this.itemForm.value.quantity,
+        price: this.itemForm.value.price,
+        total: this.itemForm.value.quantity * this.itemForm.value.price,
+      };
+      this.addItem.emit(newItem);
+      this.itemForm.reset();
+      this.toggleAddItem();
     }
   }
 
+  onRemoveItem(index: number) {
+    this.removeItem.emit(index);
+  }
+
   toggleAddItem() {
+    
     this.isItemFormActive = !this.isItemFormActive;
   }
 }

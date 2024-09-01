@@ -6,7 +6,7 @@
       <h3 class="w-[20%]">Price</h3>
       <h3 class="w-[20%] md:w-[25%]">Total</h3>
     </div>
-<app-add-item-to-invoice [items]="items"></app-add-item-to-invoice>
+    <!-- <app-add-item-to-invoice [items]="items"></app-add-item-to-invoice> -->
 
     <button
       (click)="toggleAddItem()"
@@ -22,8 +22,8 @@
 
     <!--    Add New Item Form -->
     <form
-      [formGroup]="addressForm"
-      (ngSubmit)="addItem()"
+      [formGroup]="itemForm"
+      (ngSubmit)="onAddItem()"
       class="grid grid-cols-1 lg:grid-cols-3 w-full gap-4 duration-300"
       [ngClass]="
         isItemFormActive
@@ -35,7 +35,7 @@
       <h2 class="mt-8 text-purple-1 tex-2xl font-semibold lg:col-span-3">
         Add Item
       </h2>
-      <!--      Name-->
+      <!--  Name -->
       <div class="flex flex-col gap-1 w-full">
         <label for="name" class="font-semibold text-grey-3">Item name</label>
         <input
@@ -45,19 +45,16 @@
           class="border p-2 font-medium rounded-md border-grey-3 dark:border-black-2 text-black-1 dark:text-white dark:bg-darkblue-2 outline-none"
         />
         <div
-          *ngIf="
-            addressForm.get('street')?.invalid &&
-            addressForm.get('name')?.touched
-          "
+          *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched"
           class="text-red"
         >
-          <small *ngIf="addressForm.get('name')?.errors?.['required']">
+          <small *ngIf="itemForm.get('name')?.errors?.['required']">
             Name is required.
           </small>
         </div>
       </div>
 
-      <!--      Quantity -->
+      <!--  Quantity -->
       <div class="flex flex-col gap-1 w-full">
         <label for="quantity" class="font-semibold text-grey-3"
           >Item quantity</label
@@ -71,52 +68,58 @@
         />
         <div
           *ngIf="
-            addressForm.get('street')?.invalid &&
-            addressForm.get('quantity')?.touched
+            itemForm.get('quantity')?.invalid &&
+            itemForm.get('quantity')?.touched
           "
           class="text-red"
         >
-          <small *ngIf="addressForm.get('quantity')?.errors?.['required']">
+          <small *ngIf="itemForm.get('quantity')?.errors?.['required']">
             Quantity is required.
           </small>
-          <small *ngIf="addressForm.get('quantity')?.errors?.['min']">
-            Quantity must be over 1
+          <small *ngIf="itemForm.get('quantity')?.errors?.['min']">
+            Quantity must be at least 1.
           </small>
         </div>
       </div>
 
-      <!--      Price -->
+      <!--  Price -->
       <div class="flex flex-col gap-1 w-full">
         <label for="price" class="font-semibold text-grey-3">Item Price</label>
         <input
           type="number"
           id="price"
           formControlName="price"
-          placeholder="2"
+          placeholder="0"
           class="border p-2 font-medium rounded-md border-grey-3 dark:border-black-2 text-black-1 dark:text-white dark:bg-darkblue-2 outline-none"
         />
         <div
           *ngIf="
-            addressForm.get('street')?.invalid &&
-            addressForm.get('price')?.touched
+            itemForm.get('price')?.invalid && itemForm.get('price')?.touched
           "
           class="text-red"
         >
-          <small *ngIf="addressForm.get('price')?.errors?.['required']">
+          <small *ngIf="itemForm.get('price')?.errors?.['required']">
             Price is required.
+          </small>
+          <small *ngIf="itemForm.get('price')?.errors?.['min']">
+            Price must be at least 0.
           </small>
         </div>
       </div>
 
       <div class="lg:col-span-3 w-full grid grid-cols-2 gap-4">
         <button
+          type="button"
           (click)="toggleAddItem()"
           class="w-full bg-grey-1 dark:bg-darkblue-2 hover:bg-red hover:text-light text-grey-3 p-3 rounded-full mt-3 scale-100 active:scale-75 duration-75"
         >
           Cancel
         </button>
         <button
+          type="submit"
+          [disabled]="!itemForm.valid"
           class="w-full bg-grey-1 dark:bg-darkblue-2 hover:bg-primary hover:text-light text-grey-3 p-3 rounded-full mt-3 scale-100 active:scale-75 duration-75"
+          [ngClass]="{ 'opacity-50 cursor-not-allowed': !itemForm.valid }"
         >
           + Add
         </button>

@@ -17,119 +17,138 @@
       <div class="flex flex-col items-start gap-4">
         <h2 class="text-purple-1 text-xl font-semibold">Bill form</h2>
         <!--    Street-->
+        <!-- Street Address (Sender's Address) -->
         <div class="flex flex-col gap-1 w-full">
-          <label for="street" class="font-semibold text-grey-3"
+          <label for="senderStreet" class="font-semibold text-grey-3"
             >Street Address</label
           >
           <input
-            id="street"
-            formControlName="street"
+            id="senderStreet"
+            formControlName="senderStreet"
             placeholder="Street Address"
             class="input-field"
           />
           <div
             *ngIf="
-              addressForm.get('street')?.invalid &&
-              addressForm.get('street')?.touched
+              addressForm.get('senderStreet')?.invalid &&
+              addressForm.get('senderStreet')?.touched
             "
             class="text-red"
           >
             <small
               class="danger"
-              *ngIf="addressForm.get('street')?.errors?.['required']"
+              *ngIf="addressForm.get('senderStreet')?.errors?.['required']"
+              >Street address is required.</small
             >
-              Street address is required.
-            </small>
             <small
               class="danger"
-              *ngIf="addressForm.get('street')?.errors?.['minlength']"
+              *ngIf="addressForm.get('senderStreet')?.errors?.['minlength']"
+              >Street address must be at least 5 characters long.</small
             >
-              Street address must be at least 5 characters long.
-            </small>
           </div>
         </div>
 
         <div class="grid gap-4 grid-cols-2 md:grid-cols-3 w-full">
-          <!--      City-->
-          <div class="flex flex-col gap-1">
-            <label for="city" class="font-semibold text-grey-3">City</label>
+          <div class="flex flex-col gap-1 w-full">
+            <label for="clientStreet" class="font-semibold text-grey-3"
+              >Street</label
+            >
             <input
-              id="city"
-              formControlName="city"
-              placeholder="City"
+              id="clientStreet"
+              formControlName="clientStreet"
+              placeholder="Client's Street"
               class="input-field"
             />
             <div
               *ngIf="
-                addressForm.get('city')?.invalid &&
-                addressForm.get('city')?.touched
+                addressForm.get('clientStreet')?.invalid &&
+                addressForm.get('clientStreet')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('city')?.errors?.['required']"
+                *ngIf="addressForm.get('clientStreet')?.errors?.['required']"
+                >Street is required.</small
               >
-                City is required.
-              </small>
             </div>
           </div>
 
-          <!--      PostalCode-->
-          <div class="flex flex-col gap-1">
-            <label for="postalCode" class="font-semibold text-grey-3"
+          <!-- Client's City -->
+          <div class="flex flex-col gap-1 w-full">
+            <label for="clientCity" class="font-semibold text-grey-3"
+              >City</label
+            >
+            <input
+              id="clientCity"
+              formControlName="clientCity"
+              placeholder="Client's City"
+              class="input-field"
+            />
+            <div
+              *ngIf="
+                addressForm.get('clientCity')?.invalid &&
+                addressForm.get('clientCity')?.touched
+              "
+              class="text-red"
+            >
+              <small
+                class="danger"
+                *ngIf="addressForm.get('clientCity')?.errors?.['required']"
+                >City is required.</small
+              >
+            </div>
+          </div>
+
+          <!-- Client's Postal Code -->
+          <div class="flex flex-col gap-1 w-full">
+            <label for="clientPostalCode" class="font-semibold text-grey-3"
               >Postal Code</label
             >
             <input
-              id="postalCode"
-              formControlName="postalCode"
+              id="clientPostalCode"
+              formControlName="clientPostalCode"
               placeholder="Postal Code"
               class="input-field"
             />
             <div
               *ngIf="
-                addressForm.get('postalCode')?.invalid &&
-                addressForm.get('postalCode')?.touched
+                addressForm.get('clientPostalCode')?.invalid &&
+                addressForm.get('clientPostalCode')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('postalCode')?.errors?.['required']"
+                *ngIf="addressForm.get('clientPostalCode')?.errors?.['required']"
+                >Postal code is required.</small
               >
-                Postal code is required.
-              </small>
-              <small
-                class="danger"
-                *ngIf="addressForm.get('postalCode')?.errors?.['pattern']"
-              >
-                Code must be a 5-digit number.
-              </small>
             </div>
           </div>
 
-          <!--      Country-->
-          <div class="flex flex-col gap-1 max-md:col-span-3">
-            <label for="county" class="font-semibold text-grey-3">County</label>
+          <!-- Client's Country -->
+          <div class="flex flex-col gap-1 w-full">
+            <label for="clientCountry" class="font-semibold text-grey-3"
+              >Country</label
+            >
             <input
-              id="county"
-              formControlName="county"
-              placeholder="County"
+              id="clientCountry"
+              formControlName="clientCountry"
+              placeholder="Client's Country"
               class="input-field"
             />
             <div
               *ngIf="
-                addressForm.get('county')?.invalid &&
-                addressForm.get('county')?.touched
+                addressForm.get('clientCountry')?.invalid &&
+                addressForm.get('clientCountry')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('county')?.errors?.['required']"
+                *ngIf="addressForm.get('clientCountry')?.errors?.['required']"
+                >Country is required.</small
               >
-                County is required.
-              </small>
             </div>
           </div>
         </div>
@@ -194,31 +213,7 @@
         </div>
 
         <!--      Client Address-->
-        <div class="flex flex-col gap-1 w-full">
-          <label for="clientAddress" class="font-semibold text-grey-3"
-            >Client's Address</label
-          >
-          <input
-            id="clientAddress"
-            formControlName="clientAddress"
-            placeholder="alexgrim@gmail.com"
-            class="input-field"
-          />
-          <div
-            *ngIf="
-              addressForm.get('clientAddress')?.invalid &&
-              addressForm.get('clientAddress')?.touched
-            "
-            class="text-red"
-          >
-            <small
-              class="danger"
-              *ngIf="addressForm.get('clientAddress')?.errors?.['required']"
-            >
-              Address is required.
-            </small>
-          </div>
-        </div>
+        clientAddress
 
         <div class="grid gap-4 grid-cols-1 md:grid-cols-3 w-full">
           <!--      City-->
@@ -373,32 +368,40 @@
 
       <!--      Description -->
       <div class="flex flex-col gap-1">
-        <label for="projectDescription" class="font-semibold text-grey-3"
-          >County</label
+        <label for="description" class="font-semibold text-grey-3"
+          >Description</label
         >
         <input
-          id="projectDescription"
-          formControlName="projectDescription"
-          placeholder="County"
+          id="description"
+          formControlName="description"
+          placeholder="Project description"
           class="input-field"
         />
         <div
           *ngIf="
-            addressForm.get('projectDescription')?.invalid &&
-            addressForm.get('projectDescription')?.touched
+            addressForm.get('description')?.invalid &&
+            addressForm.get('description')?.touched
           "
           class="text-red"
         >
           <small
             class="danger"
-            *ngIf="addressForm.get('projectDescription')?.errors?.['required']"
+            *ngIf="addressForm.get('description')?.errors?.['required']"
           >
-            Details is required.
+            Description is required.
           </small>
         </div>
       </div>
 
-      <app-item-list />
+      <app-add-item-to-invoice
+        [items]="items"
+        (removeItem)="removeItemFromInvoice($event)"
+      ></app-add-item-to-invoice>
+
+      <app-item-list
+        (addItem)="addItemToInvoice($event)"
+        (removeItem)="removeItemFromInvoice($event)"
+      ></app-item-list>
     </form>
     <div
       class="transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full bottom-0 left-0 fixed z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex overflow-x-hidden"
