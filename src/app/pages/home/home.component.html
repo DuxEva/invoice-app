@@ -36,6 +36,7 @@
                 name="pending"
                 value="pending"
                 class="h-4 w-4 rounded cursor-pointer"
+                (change)="onFilterChange('pending', $event)"
               />
               <span class="dark:text-grey-3 text-black-1">Pending</span>
             </label>
@@ -46,6 +47,7 @@
                 name="paid"
                 value="paid"
                 class="h-4 w-4 rounded cursor-pointer"
+                (change)="onFilterChange('paid', $event)"
               />
               <span class="dark:text-grey-3 text-black-1">Paid</span>
             </label>
@@ -56,11 +58,10 @@
                 name="draft"
                 value="draft"
                 class="h-4 w-4 rounded cursor-pointer"
+                (change)="onFilterChange('draft', $event)"
               />
               <span class="dark:text-grey-3 text-black-1">Draft</span>
             </label>
-
-            <!-- Add more options as needed -->
           </form>
         </div>
       </div>

@@ -1,12 +1,12 @@
 <div
-  class="absolute left-0 top-0 w-full lg:ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] bg-opacity-50 dark:bg-opacity-5 z-20 !h-screen overflow-y-hidden"
+  class="fixed left-0 top-0 w-full lg:ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] bg-opacity-50 dark:bg-opacity-5 z-20 !h-screen overflow-y-hidden"
   [ngClass]="{
     '-translate-x-full transition-transform duration-300 ease-in-out': !isOpen,
     'translate-x-0 transition-transform duration-300 ease-in-out': isOpen
   }"
 >
   <section
-    class="max-lg:mt-20 flex flex-col gap-6 !h-screen px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full relative"
+    class="max-lg:mt-20 flex flex-col gap-6 !h-screen px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] max-sm:rounded-r-[0px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full relative"
   >
     <form
       [formGroup]="addressForm"
@@ -401,9 +401,9 @@
       <app-item-list />
     </form>
     <div
-      class="transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full bottom-0 left-0 fixed z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex"
+      class="transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full bottom-0 left-0 fixed z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex overflow-x-hidden"
     >
-      <div class="flex justify-between">
+      <div class="flex justify-between max-sm:justify-center max-sm:gap-1">
         <app-button
           [text]="'Discard'"
           [textColor]="' text-grey-3 dark:text-white'"
@@ -417,7 +417,7 @@
             [text]="'Save as Draft'"
             [textColor]="'text-grey-3'"
             [backgroundColor]="'bg-grey-4'"
-            [width]="'w-36'"
+            [width]="'w-36 max-sm:w-32'"
             [borderRadius]="'rounded-full'"
             (click)="onSubmit()"
           ></app-button>
@@ -425,7 +425,7 @@
             [text]="'Save & Send'"
             [textColor]="'text-white'"
             [backgroundColor]="'bg-purple-1'"
-            [width]="'w-36'"
+            [width]="'w-36 max-sm:w-32'"
             [borderRadius]="'rounded-full'"
             (click)="onSubmit()"
           ></app-button>

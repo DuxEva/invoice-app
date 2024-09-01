@@ -18,6 +18,11 @@ export const selectInvoiceById = (id: string) =>
     invoices.find((invoice) => invoice.id === id)
   );
 
+export const selectInvoiceByStatus = (status: string[]) =>
+  createSelector(selectInvoices, (invoices) =>
+    invoices.filter((invoice) => status.includes(invoice.status))
+  );
+
 export const selectError = createSelector(
   selectInvoiceState,
   (state) => state.invoices.error

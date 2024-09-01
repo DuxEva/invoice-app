@@ -8,7 +8,10 @@ import {
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Invoice, InvoiceState } from '../../model/types.model';
-import { selectInvoices } from '../../store/invoice/invoice.selector';
+import {
+  selectInvoices,
+  selectInvoiceByStatus,
+} from '../../store/invoice/invoice.selector';
 import * as InvoiceActions from '../../store/invoice/invoice.actions';
 
 @Component({
@@ -20,6 +23,7 @@ export class HomeComponent implements OnInit {
   invoices$!: Observable<Invoice[]>;
   isOpen = false;
   isFilterOpen = false;
+  selectedFilters: string[] = [];
 
   @ViewChild('filterButton') filterButton!: ElementRef;
   @ViewChild('filterDiv') filterDiv!: ElementRef;
@@ -37,6 +41,26 @@ export class HomeComponent implements OnInit {
 
   onToggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
+  }
+
+  onFilterChange(status: string, event: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.selectedFilters.push(status);
+    } else {
+      this.selectedFilters = this.selectedFilters.filter((s) => s !== status);
+    }
+    this.filterInvoices();
+  }
+
+  filterInvoices() {
+    if (this.selectedFilters.length > 0) {
+      this.invoices$ = this.store.pipe(
+        select(selectInvoiceByStatus(this.selectedFilters))
+      );
+    } else {
+      this.invoices$ = this.store.pipe(select(selectInvoices));
+    }
   }
 
   @HostListener('document:click', ['$event'])
