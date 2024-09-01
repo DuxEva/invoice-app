@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as InvoiceActions from '../../store/invoice/invoice.actions';
+import { Invoice } from '../../model/types.model';
 
 @Component({
   selector: 'app-new-invoice-form',
@@ -10,7 +13,7 @@ export class NewInvoiceFormComponent {
   addressForm!: FormGroup;
   @Input() isOpen = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.createForm();
   }
 
@@ -21,7 +24,7 @@ export class NewInvoiceFormComponent {
       county: ['', [Validators.required]],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
       clientName: ['', [Validators.required]],
-      clientEmail: ['', [Validators.required]],
+      clientEmail: ['', [Validators.required, Validators.email]],
       clientAddress: ['', [Validators.required]],
       clientCity: ['', [Validators.required]],
       clientCountry: ['', [Validators.required]],
@@ -37,7 +40,17 @@ export class NewInvoiceFormComponent {
 
   onSubmit() {
     if (this.addressForm.valid) {
-      console.log('Form Submitted!', this.addressForm.value);
+      const newInvoice: Invoice = {
+        id: this.generateInvoiceId(),
+        ...this.addressForm.value,
+        status: 'pending',
+        items: [], // You might want to add an item list to your form
+        total: 0, // Calculate the total based on items
+      };
+      this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
+      console.log('New invoice added:', newInvoice);
+      this.addressForm.reset();
+      this.isOpen = false;
     } else {
       console.log('Form is invalid');
     }
@@ -45,5 +58,11 @@ export class NewInvoiceFormComponent {
 
   onCancel() {
     this.isOpen = false;
+    this.addressForm.reset();
+  }
+
+  private generateInvoiceId(): string {
+    // Generate a unique invoice ID (you might want to use a more robust method)
+    return 'INV-' + Math.random().toString(36).substr(2, 9).toUpperCase();
   }
 }

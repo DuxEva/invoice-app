@@ -1,17 +1,15 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Invoice } from '../../model/types.model';
+import { Invoice, InvoiceState } from '../../model/types.model';
 
 export const selectInvoiceState = createFeatureSelector<{
-  invoices: {
-    invoices: Invoice[];
-    error: string | null;
-  };
+  invoices: Invoice[];
+  error: string | null;
 }>('invoice');
 
-export const selectInvoices = createSelector(
-  selectInvoiceState,
-  (state) => state.invoices.invoices
-);
+export const selectInvoices = createSelector(selectInvoiceState, (state) => {
+  selectInvoiceState;
+  return state.invoices;
+});
 
 export const selectInvoiceById = (id: string) =>
   createSelector(selectInvoices, (invoices) =>
@@ -25,5 +23,10 @@ export const selectInvoiceByStatus = (status: string[]) =>
 
 export const selectError = createSelector(
   selectInvoiceState,
-  (state) => state.invoices.error
+  (state) => state.error
+);
+
+export const selectLastAddedInvoice = createSelector(
+  selectInvoices,
+  (invoices) => invoices[invoices.length - 1]
 );

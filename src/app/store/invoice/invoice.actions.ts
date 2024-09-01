@@ -1,12 +1,18 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { Invoice } from '../../model/types.model';
 
 export const loadInvoices = createAction('[Invoice] Load Invoices');
 export const loadInvoicesSuccess = createAction(
   '[Invoice] Load Invoices Success',
-  (invoices: any) => ({ invoices })
+  props<{ invoices: Invoice[] }>()
 );
 
 export const loadInvoicesFailure = createAction(
   '[Invoice] Load Invoices Failure',
-  (error: any) => ({ error })
+  props<{ error: any }>()
+);
+
+export const addInvoice = createAction(
+  '[Invoice] Add Invoice',
+  props<{ invoice: Invoice }>()
 );
