@@ -39,13 +39,17 @@ export class NewInvoiceFormComponent {
   }
 
   onSubmit() {
+    const date = new Date();
     if (this.addressForm.valid) {
       const newInvoice: Invoice = {
         id: this.generateInvoiceId(),
         ...this.addressForm.value,
         status: 'pending',
-        items: [], // You might want to add an item list to your form
-        total: 0, // Calculate the total based on items
+        createdAt: `${date.getFullYear()}-${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`,
+        items: [],
+        total: 0,
       };
       this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
       console.log('New invoice added:', newInvoice);
@@ -62,7 +66,16 @@ export class NewInvoiceFormComponent {
   }
 
   private generateInvoiceId(): string {
-    // Generate a unique invoice ID (you might want to use a more robust method)
-    return 'INV-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const firstLetter = letter[Math.floor(Math.random() * 26)];
+    const secondLetter = letter[Math.floor(Math.random() * 26)];
+    const prefix = `${firstLetter}${secondLetter}`;
+    const numbers = '0123456789';
+    const randomPart = Array.from(
+      { length: 2 },
+      () => numbers[Math.floor(Math.random() * 10)]
+    ).join('');
+    const datePart = new Date().getFullYear().toString().slice(-2);
+    return `${prefix}${datePart}${randomPart}`;
   }
 }

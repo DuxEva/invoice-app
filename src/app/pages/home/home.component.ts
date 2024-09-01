@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store<InvoiceState>, private eRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.store.dispatch(InvoiceActions.loadInvoices());
     this.invoices$ = this.store.pipe(select(selectInvoices));
   }
 
