@@ -30,3 +30,8 @@ export const selectLastAddedInvoice = createSelector(
   selectInvoices,
   (invoices) => invoices[invoices.length - 1]
 );
+
+// export const selectDeletedInvoice = createSelector(
+//   selectInvoices,
+//   (invoices) => invoices[invoices.length - 1]
+// );

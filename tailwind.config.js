@@ -4,6 +4,15 @@ module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {
+      keyframes: {
+        "scale-up": {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        "scale-up": "scale-up 300ms ease-out forwards",
+      },
       colors: {
         purple: {
           1: "#7C5DFA",

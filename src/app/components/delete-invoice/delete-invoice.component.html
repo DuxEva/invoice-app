@@ -1,0 +1,31 @@
+<div
+  class="fixed inset-0 w-full min-h-screen flex items-end sm:items-center justify-center z-10 bg-[#000] bg-opacity-50"
+  [ngClass]="{ hidden: !isOpen }"
+>
+  <div
+    class="w-full max-h-[80%] lg:w-[44%] xl:w-[40%] sm:w-[60%] md:w-[65%] bg-white dark:bg-darkblue-2 z-20 p-4 rounded-t-2xl sm:rounded-xl animate-scale-up"
+  >
+    <div class="px-3">
+      <h1 class="text-black-2 text-3xl font-bold mb-2">Confirm Deletion</h1>
+      <p class="text-purple-3">
+        Are you sure you want to delete invoice #{{ invoiceId }}? This action
+        cannot be undone.
+      </p>
+    </div>
+    <div class="flex justify-end">
+      <div class="flex w-1/2 items-center gap-5 justify-end">
+        <button
+          class="w-full bg-grey-1 dark:bg-darkblue-1 rounded-full py-2 text-purple-3 font-semibold"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button class="w-full bg-red-1 text-white rounded-full py-2"
+          (click)="onDelete()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

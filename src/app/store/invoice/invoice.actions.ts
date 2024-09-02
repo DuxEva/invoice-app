@@ -16,3 +16,8 @@ export const addInvoice = createAction(
   '[Invoice] Add Invoice',
   props<{ invoice: Invoice }>()
 );
+
+export const deleteInvoice = createAction(
+  '[Invoice] Delete Invoice',
+  props<{ id: string }>()
+);

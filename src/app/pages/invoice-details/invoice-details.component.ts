@@ -16,6 +16,7 @@ import {
 export class InvoiceDetailsComponent implements OnInit {
   invoice: Invoice | undefined;
   error = '';
+  isDeleteModalOpen = false;
 
   constructor(
     private store: Store,
@@ -36,5 +37,10 @@ export class InvoiceDetailsComponent implements OnInit {
       );
       this.router.navigate(['/']);
     }
+  }
+
+  onIsDeleteModalOpen() {
+    this.isDeleteModalOpen = !this.isDeleteModalOpen;
+    console.log(this.isDeleteModalOpen);
   }
 }

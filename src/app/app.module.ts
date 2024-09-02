@@ -23,6 +23,7 @@ import { NewInvoiceFormComponent } from './components/new-invoice-form/new-invoi
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddItemToInvoiceComponent } from './components/add-item-to-invoice/add-item-to-invoice.component';
+import { DeleteInvoiceComponent } from './components/delete-invoice/delete-invoice.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AddItemToInvoiceComponent } from './components/add-item-to-invoice/add-
     NewInvoiceFormComponent,
     ItemListComponent,
     AddItemToInvoiceComponent,
+    DeleteInvoiceComponent,
   ],
   imports: [
     BrowserModule,
