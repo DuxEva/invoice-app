@@ -31,7 +31,7 @@ export const selectLastAddedInvoice = createSelector(
   (invoices) => invoices[invoices.length - 1]
 );
 
-// export const selectDeletedInvoice = createSelector(
-//   selectInvoices,
-//   (invoices) => invoices[invoices.length - 1]
-// );
+export const selectMarkedAsPaidInvoice = createSelector(
+  selectInvoices,
+  (invoices) => invoices.find((invoice) => invoice.status === 'paid')
+);

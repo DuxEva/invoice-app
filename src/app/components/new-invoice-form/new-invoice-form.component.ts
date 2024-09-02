@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../store/invoice/invoice.actions';
@@ -11,6 +11,7 @@ import { Invoice, Item } from '../../model/types.model';
 })
 export class NewInvoiceFormComponent {
   addressForm!: FormGroup;
+  @Output() isFormOpen = new EventEmitter();
   @Input() isOpen = false;
   items: Item[] = [];
 
@@ -76,6 +77,7 @@ export class NewInvoiceFormComponent {
       };
       this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
       this.resetForm();
+      this.isFormOpen.emit();
     } else {
       console.error('Form is invalid or no items added');
     }
@@ -83,7 +85,7 @@ export class NewInvoiceFormComponent {
 
   onCancel() {
     this.resetForm();
-    this.isOpen = false;
+    this.isFormOpen.emit();
   }
 
   addItemToInvoice(item: Item) {

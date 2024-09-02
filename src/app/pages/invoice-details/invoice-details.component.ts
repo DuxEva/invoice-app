@@ -41,6 +41,11 @@ export class InvoiceDetailsComponent implements OnInit {
 
   onIsDeleteModalOpen() {
     this.isDeleteModalOpen = !this.isDeleteModalOpen;
-    console.log(this.isDeleteModalOpen);
+  }
+
+  onMarkAsPaid() {
+    if (this.invoice) {
+      this.store.dispatch(InvoiceActions.markAsPaid({ id: this.invoice.id }));
+    }
   }
 }

@@ -39,6 +39,7 @@
           ></app-button>
           <app-button
             [ngClass]="{ hidden: invoice.status === 'paid' }"
+            (click)="onMarkAsPaid()"
             [text]="'Mark as Paid'"
             [textColor]="'text-white'"
             [backgroundColor]="'bg-purple-1'"
@@ -165,6 +166,8 @@
       (click)="onIsDeleteModalOpen()"
     ></app-button>
     <app-button
+      [ngClass]="{ hidden: invoice?.status === 'paid' }"
+      (click)="onMarkAsPaid()"
       [text]="'Mark as Paid'"
       [textColor]="'text-white'"
       [backgroundColor]="'bg-purple-1'"

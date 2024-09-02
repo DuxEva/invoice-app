@@ -20,7 +20,8 @@ import {
 })
 export class HomeComponent implements OnInit {
   invoices$!: Observable<Invoice[]>;
-  isOpen = false;
+  isNewInvoiceFormOpen = false;
+
   isFilterOpen = false;
   selectedFilters: string[] = [];
 
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   onToggleForm() {
-    this.isOpen = !this.isOpen;
+    this.isNewInvoiceFormOpen = !this.isNewInvoiceFormOpen;
   }
 
   onToggleFilter() {

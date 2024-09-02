@@ -27,5 +27,11 @@ export const invoiceReducer = createReducer(
   on(InvoiceActions.deleteInvoice, (state, { id }) => ({
     ...state,
     invoices: state.invoices.filter((invoice) => invoice.id !== id),
+  })),
+  on(InvoiceActions.markAsPaid, (state, { id }) => ({
+    ...state,
+    invoices: state.invoices.map((invoice) =>
+      invoice.id === id ? { ...invoice, status: 'paid' } : invoice
+    ),
   }))
 );
