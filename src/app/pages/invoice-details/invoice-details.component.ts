@@ -17,6 +17,7 @@ export class InvoiceDetailsComponent implements OnInit {
   invoice: Invoice | undefined;
   error = '';
   isDeleteModalOpen = false;
+  isNewInvoiceFormOpen = false;
 
   constructor(
     private store: Store,
@@ -47,5 +48,9 @@ export class InvoiceDetailsComponent implements OnInit {
     if (this.invoice) {
       this.store.dispatch(InvoiceActions.markAsPaid({ id: this.invoice.id }));
     }
+  }
+
+  onToggleForm() {
+    this.isNewInvoiceFormOpen = !this.isNewInvoiceFormOpen;
   }
 }

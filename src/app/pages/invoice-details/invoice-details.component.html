@@ -2,6 +2,10 @@
   class="w-full space-y-7 overflow-y-auto max-sm:mb-28 transition-all duration-300 ease-in-out"
   *ngIf="invoice"
 >
+  <app-new-invoice-form
+    (isFormOpen)="onToggleForm()"
+    [isOpen]="isNewInvoiceFormOpen"
+  ></app-new-invoice-form>
   <div class="">
     <div class="mb-6">
       <a
@@ -28,6 +32,7 @@
             [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
             [width]="'w-auto'"
             [borderRadius]="'rounded-full'"
+            (click)="onToggleForm()"
           ></app-button>
           <app-button
             [text]="'Delete'"
@@ -156,6 +161,7 @@
       [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
       [width]="'w-20'"
       [borderRadius]="'rounded-full'"
+      (click)="onToggleForm()"
     ></app-button>
     <app-button
       [text]="'Delete'"
