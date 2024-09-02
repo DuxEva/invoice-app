@@ -8,11 +8,7 @@
   <section
     class="max-lg:mt-20 flex flex-col gap-6 !h-screen px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] max-sm:rounded-r-[0px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full relative"
   >
-    <form
-      [formGroup]="addressForm"
-      (ngSubmit)="onSubmit()"
-      class="flex flex-col gap-6 mb-28"
-    >
+    <form [formGroup]="addressForm" class="flex flex-col gap-6 mb-28">
       <!--    Bill form-->
       <div class="flex flex-col items-start gap-4">
         <h2 class="text-purple-1 text-xl font-semibold">Bill from</h2>
@@ -37,11 +33,12 @@
           >
             <small
               class="danger"
-              *ngIf="addressForm.get('senderStreet')?.errors?.['required']"
-              >Street address is required. {{  
-              
-            addressForm.get('senderStreet')?.errors?.['required']  | json}}</small
-            >
+              *ngIf="
+                addressForm.get('senderStreet')?.invalid &&
+                addressForm.get('senderStreet')?.touched
+              "
+              >Street address is required.
+            </small>
             <small
               class="danger"
               *ngIf="addressForm.get('senderStreet')?.errors?.['minlength']"
@@ -58,7 +55,7 @@
             <input
               id="clientStreet"
               formControlName="clientStreet"
-              placeholder="Client's Street"
+              placeholder="Street"
               class="input-field"
             />
             <div
@@ -78,25 +75,25 @@
 
           <!-- Client's City -->
           <div class="flex flex-col gap-1 w-full">
-            <label for="clientCity" class="font-semibold text-grey-3"
+            <label for="senderCity" class="font-semibold text-grey-3"
               >City</label
             >
             <input
-              id="clientCity"
-              formControlName="clientCity"
-              placeholder="Client's City"
+              id="senderCity"
+              formControlName="senderCity"
+              placeholder="London"
               class="input-field"
             />
             <div
               *ngIf="
-                addressForm.get('clientCity')?.invalid &&
-                addressForm.get('clientCity')?.touched
+                addressForm.get('senderCity')?.invalid &&
+                addressForm.get('senderCity')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('clientCity')?.errors?.['required']"
+                *ngIf="addressForm.get('senderCity')?.errors?.['required']"
                 >City is required.</small
               >
             </div>
@@ -104,51 +101,51 @@
 
           <!-- Client's Postal Code -->
           <div class="flex flex-col gap-1 w-full">
-            <label for="clientPostalCode" class="font-semibold text-grey-3"
+            <label for="senderPostalCode" class="font-semibold text-grey-3"
               >Postal Code</label
             >
             <input
-              id="clientPostalCode"
-              formControlName="clientPostalCode"
+              id="senderPostalCode"
+              formControlName="senderPostalCode"
               placeholder="Postal Code"
               class="input-field"
             />
             <div
               *ngIf="
-                addressForm.get('clientPostalCode')?.invalid &&
-                addressForm.get('clientPostalCode')?.touched
+                addressForm.get('senderPostalCode')?.invalid &&
+                addressForm.get('senderPostalCode')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('clientPostalCode')?.errors?.['required']"
+                *ngIf="addressForm.get('senderPostalCode')?.errors?.['required']"
                 >Postal code is required.</small
               >
             </div>
           </div>
 
           <!-- Client's Country -->
-          <div class="flex flex-col gap-1 w-full">
-            <label for="clientCountry" class="font-semibold text-grey-3"
+          <div class="flex flex-col gap-1 w-full md:col-span-4">
+            <label for="senderCountry" class="font-semibold text-grey-3"
               >Country</label
             >
             <input
-              id="clientCountry"
-              formControlName="clientCountry"
+              id="senderCountry"
+              formControlName="senderCountry"
               placeholder="Client's Country"
-              class="input-field"
+              class="input-field w-full"
             />
             <div
               *ngIf="
-                addressForm.get('clientCountry')?.invalid &&
-                addressForm.get('clientCountry')?.touched
+                addressForm.get('senderCountry')?.invalid &&
+                addressForm.get('senderCountry')?.touched
               "
               class="text-red"
             >
               <small
                 class="danger"
-                *ngIf="addressForm.get('clientCountry')?.errors?.['required']"
+                *ngIf="addressForm.get('senderCountry')?.errors?.['required']"
                 >Country is required.</small
               >
             </div>
@@ -162,7 +159,7 @@
 
         <!--    Client Name-->
         <div class="flex flex-col gap-1 w-full">
-          <label for="street" class="font-semibold text-grey-3"
+          <label for="clientName" class="font-semibold text-grey-3"
             >Client's name</label
           >
           <input
@@ -215,7 +212,6 @@
         </div>
 
         <!--      Client Address-->
-        clientAddress
 
         <div class="grid gap-4 grid-cols-1 md:grid-cols-3 w-full">
           <!--      City-->
@@ -310,7 +306,7 @@
           <!--      Invoice Date -->
           <div class="flex flex-col gap-1">
             <label for="invoiceDate" class="font-semibold text-grey-3"
-              >City</label
+              >Due Date</label
             >
             <input
               type="date"
@@ -394,6 +390,12 @@
           </small>
         </div>
       </div>
+      <div class="flex w-full text-grey-3 font-medium text-sm mt-4">
+        <h3 class="text-grey-3 w-[40%] md:w-[35%]">Item Name</h3>
+        <h3 class="w-[20%]">Qty</h3>
+        <h3 class="w-[20%]">Price</h3>
+        <h3 class="w-[20%] md:w-[25%]">Total</h3>
+      </div>
 
       <app-add-item-to-invoice
         [items]="items"
@@ -424,7 +426,7 @@
             [backgroundColor]="'bg-grey-4'"
             [width]="'w-36 max-sm:w-32'"
             [borderRadius]="'rounded-full'"
-            (click)="onSubmit()"
+            (click)="onSubmit('draft')"
           ></app-button>
           <app-button
             [text]="'Save & Send'"
@@ -432,7 +434,7 @@
             [backgroundColor]="'bg-purple-1'"
             [width]="'w-36 max-sm:w-32'"
             [borderRadius]="'rounded-full'"
-            (click)="onSubmit()"
+            (click)="onSubmit('pending')"
           ></app-button>
         </div>
       </div>

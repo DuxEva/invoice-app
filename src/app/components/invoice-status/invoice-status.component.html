@@ -4,25 +4,26 @@
   <div
     class="absolute w-full h-full top-0 left-0 opacity-10 rounded-lg"
     [ngClass]="{
-      'bg-red-1': invoice.status === 'pending',
+      'bg-grey-3': invoice.status === 'draft',
       'bg-green-1': invoice.status === 'paid',
-      'bg-yellow-1': invoice.status === 'draft'
+      'bg-yellow-1': invoice.status === 'pending'
     }"
   ></div>
   <div
     class="w-2 h-2 rounded-full z-10"
     [ngClass]="{
-      'bg-red-1 text-red-1': invoice.status === 'pending',
+      'dark:bg-grey-2 bg-darkblue-1 text-darkblue-1':
+        invoice.status === 'draft',
       'bg-green-1': invoice.status === 'paid',
-      'bg-yellow-1 text-yellow-1': invoice.status === 'draft'
+      'bg-yellow-1 text-yellow-1': invoice.status === 'pending'
     }"
   ></div>
   <p
     class="text-green-1 font-bold z-10"
     [ngClass]="{
-      ' text-red-1': invoice.status === 'pending',
+      ' text-darkblue-1 dark:text-white': invoice.status === 'draft',
       'text-green-1': invoice.status === 'paid',
-      ' text-yellow-1': invoice.status === 'draft'
+      ' text-yellow-1': invoice.status === 'pending'
     }"
   >
     {{ invoice.status }}

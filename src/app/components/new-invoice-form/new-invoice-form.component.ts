@@ -29,70 +29,53 @@ export class NewInvoiceFormComponent {
       senderStreet: ['', [Validators.required, Validators.minLength(5)]],
       senderCity: ['', [Validators.required]],
       senderCountry: ['', [Validators.required]],
-      senderPostalCode: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[A-Z0-9]{3}[A-Z0-9 ]{0,3}[A-Z0-9]{3}$'),
-        ],
-      ],
+      senderPostalCode: ['', [Validators.required]],
       clientName: ['', [Validators.required]],
       clientEmail: ['', [Validators.required, Validators.email]],
       clientStreet: ['', [Validators.required]],
       clientCity: ['', [Validators.required]],
       clientCountry: ['', [Validators.required]],
-      clientPostalCode: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[A-Z0-9]{3}[A-Z0-9 ]{0,3}[A-Z0-9]{3}$'),
-        ],
-      ],
+      clientPostalCode: ['', [Validators.required]],
       invoiceDate: ['', [Validators.required]],
       paymentTerms: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
   }
 
-  onSubmit() {
-    if (this.addressForm.invalid) {
-      console.error('Form is invalid or no items added');
+  onSubmit(status: string) {
+    if (this.addressForm.invalid || this.items.length === 0) {
       this.markFormAsTouched();
       return;
     }
-    if (this.items.length !== 0) {
-      const newInvoice: Invoice = {
-        id: this.generateInvoiceId(),
-        createdAt: this.addressForm.value.invoiceDate,
-        paymentDue: this.calculatePaymentDue(),
-        description: this.addressForm.value.description,
-        paymentTerms: this.addressForm.value.paymentTerms,
-        clientName: this.addressForm.value.clientName,
-        clientEmail: this.addressForm.value.clientEmail,
-        status: 'pending',
-        senderAddress: {
-          street: this.addressForm.value.senderStreet,
-          city: this.addressForm.value.senderCity,
-          postCode: this.addressForm.value.senderPostalCode,
-          country: this.addressForm.value.senderCountry,
-        },
-        clientAddress: {
-          street: this.addressForm.value.clientStreet,
-          city: this.addressForm.value.clientCity,
-          postCode: this.addressForm.value.clientPostalCode,
-          country: this.addressForm.value.clientCountry,
-        },
-        items: this.items,
-        total: this.calculateTotal(),
-      };
-      this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
-      this.resetForm();
-      this.isFormOpen.emit();
-    } else {
-      this.toastr.error('Please add items to the invoice', 'Error', {
-        timeOut: 3000,
-      });
-    }
+
+    const newInvoice: Invoice = {
+      id: this.generateInvoiceId(),
+      createdAt: this.findCreatedAt(),
+      paymentDue: this.addressForm.value.paymentDue,
+      description: this.addressForm.value.description,
+      paymentTerms: this.addressForm.value.paymentTerms,
+      clientName: this.addressForm.value.clientName,
+      clientEmail: this.addressForm.value.clientEmail,
+      status: status,
+      senderAddress: {
+        street: this.addressForm.value.senderStreet,
+        city: this.addressForm.value.senderCity,
+        postCode: this.addressForm.value.senderPostalCode,
+        country: this.addressForm.value.senderCountry,
+      },
+      clientAddress: {
+        street: this.addressForm.value.clientStreet,
+        city: this.addressForm.value.clientCity,
+        postCode: this.addressForm.value.clientPostalCode,
+        country: this.addressForm.value.clientCountry,
+      },
+      items: this.items,
+      total: this.calculateTotal(),
+    };
+
+    this.store.dispatch(InvoiceActions.addInvoice({ invoice: newInvoice }));
+    this.resetForm();
+    this.isFormOpen.emit();
   }
 
   onCancel() {
@@ -133,7 +116,7 @@ export class NewInvoiceFormComponent {
     return this.items.reduce((total, item) => total + item.total, 0);
   }
 
-  private calculatePaymentDue(): string {
+  private findCreatedAt(): string {
     const invoiceDate = new Date(this.addressForm.value.invoiceDate);
     invoiceDate.setDate(
       invoiceDate.getDate() + this.addressForm.value.paymentTerms
@@ -151,7 +134,7 @@ export class NewInvoiceFormComponent {
   markFormAsDirty() {
     this.addressForm.markAsTouched();
   }
-  // create a function that loops through the form controls and marks them as touched
+
   markFormAsTouched() {
     Object.keys(this.addressForm.controls).forEach((key) => {
       this.addressForm.get(key)?.markAsTouched();
