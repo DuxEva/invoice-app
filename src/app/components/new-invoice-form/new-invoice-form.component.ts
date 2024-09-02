@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../store/invoice/invoice.actions';
+import { ToastrService } from 'ngx-toastr';
 import { Invoice, Item } from '../../model/types.model';
 
 @Component({
@@ -15,7 +16,11 @@ export class NewInvoiceFormComponent {
   @Input() isOpen = false;
   items: Item[] = [];
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private toastr: ToastrService
+  ) {
     this.createForm();
   }
 
@@ -50,6 +55,11 @@ export class NewInvoiceFormComponent {
   }
 
   onSubmit() {
+    if (this.addressForm.invalid) {
+      console.error('Form is invalid or no items added');
+      this.markFormAsTouched();
+      return;
+    }
     if (this.items.length !== 0) {
       const newInvoice: Invoice = {
         id: this.generateInvoiceId(),
@@ -79,7 +89,9 @@ export class NewInvoiceFormComponent {
       this.resetForm();
       this.isFormOpen.emit();
     } else {
-      console.error('Form is invalid or no items added');
+      this.toastr.error('Please add items to the invoice', 'Error', {
+        timeOut: 3000,
+      });
     }
   }
 
@@ -134,5 +146,15 @@ export class NewInvoiceFormComponent {
     this.items = [];
     this.addressForm.markAsPristine();
     this.addressForm.markAsUntouched();
+  }
+
+  markFormAsDirty() {
+    this.addressForm.markAsTouched();
+  }
+  // create a function that loops through the form controls and marks them as touched
+  markFormAsTouched() {
+    Object.keys(this.addressForm.controls).forEach((key) => {
+      this.addressForm.get(key)?.markAsTouched();
+    });
   }
 }

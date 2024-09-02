@@ -24,6 +24,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddItemToInvoiceComponent } from './components/add-item-to-invoice/add-item-to-invoice.component';
 import { DeleteInvoiceComponent } from './components/delete-invoice/delete-invoice.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { DeleteInvoiceComponent } from './components/delete-invoice/delete-invoi
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     StoreModule.forRoot({ invoice: invoiceReducer }),
     StoreDevtoolsModule.instrument({

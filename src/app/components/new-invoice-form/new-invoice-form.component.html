@@ -30,15 +30,17 @@
           />
           <div
             *ngIf="
-              addressForm.get('senderStreet')?.invalid &&
-              addressForm.get('senderStreet')?.touched
+              addressForm.get('senderStreet')?.errors ||
+              addressForm.get('senderStreet')?.dirty
             "
             class="text-red"
           >
             <small
               class="danger"
               *ngIf="addressForm.get('senderStreet')?.errors?.['required']"
-              >Street address is required.</small
+              >Street address is required. {{  
+              
+            addressForm.get('senderStreet')?.errors?.['required']  | json}}</small
             >
             <small
               class="danger"
