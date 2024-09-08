@@ -26,6 +26,7 @@ import { AddItemToInvoiceComponent } from './components/add-item-to-invoice/add-
 import { DeleteInvoiceComponent } from './components/delete-invoice/delete-invoice.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputFieldComponent } from './components/shared/input-field/input-field.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ItemListComponent,
     AddItemToInvoiceComponent,
     DeleteInvoiceComponent,
+    InputFieldComponent,
   ],
   imports: [
     BrowserModule,

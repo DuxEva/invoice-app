@@ -45,7 +45,6 @@ export class ItemListComponent {
   }
 
   toggleAddItem() {
-    
     this.isItemFormActive = !this.isItemFormActive;
   }
 }
