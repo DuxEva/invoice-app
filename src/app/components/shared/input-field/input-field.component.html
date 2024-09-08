@@ -1,0 +1,274 @@
+<div class="flex flex-col gap-1 w-full">
+  <label [for]="controlName" class="font-semibold text-grey-3">
+    {{ label }}
+  </label>
+  <input
+    [id]="controlName"
+    [formControlName]="controlName"
+    [placeholder]="placeholder"
+    class="input-field"
+  />
+  <div
+    *ngIf="
+      formGroup.get(controlName)?.touched && formGroup.get(controlName)?.invalid
+    "
+    class="text-red-500"
+  >
+    <small
+      *ngIf="formGroup.get(controlName)?.hasError('required')"
+      class="danger"
+    >
+      {{ label }} is required.
+    </small>
+    <small
+      *ngIf="formGroup.get(controlName)?.hasError('minlength')"
+      class="danger"
+    >
+      {{ label }} must be at least {{ minLength }} characters long.
+    </small>
+  </div>
+</div>
+
+<!-- 
+<div
+  class="fixed left-0 top-0 w-full lg:ml-20 backdrop-filter backdrop-blur-[2px] inset-0 bg-[#000] bg-opacity-50 dark:bg-opacity-5 z-20 !h-screen overflow-y-hidden"
+  [ngClass]="{
+    '-translate-x-full transition-transform duration-300 ease-in-out': !isOpen,
+    'translate-x-0 transition-transform duration-300 ease-in-out': isOpen
+  }"
+>
+  <section
+    class="max-lg:mt-20 flex flex-col gap-6 !h-screen px-4 scrollbar-thin py-6 bg-white dark:bg-black-2 rounded-r-[20px] max-sm:rounded-r-[0px] overflow-y-auto custom-scroll transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full relative"
+  >
+    <form [formGroup]="addressForm" class="flex flex-col gap-6 mb-28">
+      <div class="flex flex-col items-start gap-4">
+        <h2 class="text-purple-1 text-xl font-semibold">Bill from</h2>
+        <div class="w-full">
+          <app-input-field
+            [label]="'Street Address'"
+            [controlName]="'senderStreet'"
+            [placeholder]="'Street address'"
+            [formGroup]="addressForm"
+            [minLength]="3"
+          />
+        </div>
+
+        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 w-full">
+          <div class="flex flex-col gap-1 w-full">
+            <app-input-field
+              [label]="'City'"
+              [controlName]="'senderCity'"
+              [placeholder]="'City'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1 w-full">
+            <app-input-field
+              [label]="'Postal Code'"
+              [controlName]="'senderPostalCode'"
+              [placeholder]="'Postal Code'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1 w-full max-md:col-span-4">
+            <app-input-field
+              [label]="'Country'"
+              [controlName]="'senderCountry'"
+              [placeholder]="'United Kingdom'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4">
+        <h2 class="text-purple-1 text-xl font-semibold">Bill To</h2>
+
+        <div class="flex flex-col gap-1 w-full">
+          <app-input-field
+            [label]="'Client\'s name'"
+            [controlName]="'clientName'"
+            [placeholder]="'Alex Grim'"
+            [formGroup]="addressForm"
+            [minLength]="3"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1 w-full">
+          <app-input-field
+            [label]="'Client\'s Email'"
+            [controlName]="'clientEmail'"
+            [placeholder]="'alexgrim@gmail.com'"
+            [formGroup]="addressForm"
+            [minLength]="3"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1 w-full">
+          <app-input-field
+            [label]="'Client\'s Street'"
+            [controlName]="'clientStreet'"
+            [placeholder]="'Kigali'"
+            [formGroup]="addressForm"
+            [minLength]="3"
+          />
+        </div>
+
+
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-3 w-full">
+          <div class="flex flex-col gap-1">
+            <app-input-field
+              [label]="'City'"
+              [controlName]="'clientCity'"
+              [placeholder]="'Bradford'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <app-input-field
+              [label]="'Postal Code'"
+              [controlName]="'clientPostalCode'"
+              [placeholder]="'Postal Code'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1 max-md:col-span-3">
+            <app-input-field
+              [label]="'Client\'s Country'"
+              [controlName]="'clientCountry'"
+              [placeholder]="'Rwanda'"
+              [formGroup]="addressForm"
+              [minLength]="3"
+            />
+          </div>
+        </div>
+
+        <div class="grid gap-4 grid-cols-2 w-full">
+          <div class="flex flex-col gap-1">
+            <label for="invoiceDate" class="font-semibold text-grey-3"
+              >Due Date</label
+            >
+            <input
+              type="date"
+              id="invoiceDate"
+              formControlName="invoiceDate"
+              placeholder="Bradford"
+              class="input-field"
+            />
+            <div
+              *ngIf="
+                addressForm.get('invoiceDate')?.invalid &&
+                addressForm.get('invoiceDate')?.touched
+              "
+              class="text-red"
+            >
+              <small
+                class="danger"
+                *ngIf="addressForm.get('invoiceDate')?.errors?.['required']"
+              >
+                Invoice date is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="paymentTerms" class="font-semibold text-grey-3"
+              >Payment Terms</label
+            >
+            <select
+              id="paymentTerms"
+              formControlName="paymentTerms"
+              class="border dark:border-darkblue-2 dark:bg-darkblue-2 p-2 py-3 font-medium rounded-md border-grey-3 text-black-1 dark:text-white outline-none"
+            >
+              <option value="1">Next 1 day</option>
+              <option value="7">Next 7 days</option>
+              <option value="14">Next 14 days</option>
+              <option value="30">Next 30 days</option>
+            </select>
+            <div
+              *ngIf="
+                addressForm.get('paymentTerms')?.invalid &&
+                addressForm.get('paymentTerms')?.touched
+              "
+              class="text-red"
+            >
+              <small
+                class="danger"
+                *ngIf="addressForm.get('paymentTerms')?.errors?.['required']"
+              >
+                Terms is required.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <app-input-field
+          [label]="'Description'"
+          [controlName]="'description'"
+          [placeholder]="'Project'"
+          [formGroup]="addressForm"
+        />
+      </div>
+      <div class="flex w-full text-grey-3 font-medium text-sm mt-4">
+        <h3 class="text-grey-3 w-[40%] md:w-[35%]">Item Name</h3>
+        <h3 class="w-[20%]">Qty</h3>
+        <h3 class="w-[20%]">Price</h3>
+        <h3 class="w-[20%] md:w-[25%]">Total</h3>
+      </div>
+
+      <app-add-item-to-invoice
+        [items]="items"
+        (removeItem)="removeItemFromInvoice($event)"
+      ></app-add-item-to-invoice>
+
+      <app-item-list
+        (addItem)="addItemToInvoice($event)"
+        (removeItem)="removeItemFromInvoice($event)"
+      ></app-item-list>
+    </form>
+    <div
+      class="transition-all duration-300 ease-in-out w-1/2 max-lg:w-2/3 max-sm:w-full bottom-0 left-0 fixed z-20 justify-center items-center bg-white dark:bg-darkblue-1 py-5 px-8 max-md:px-3 max-sm:flex overflow-x-hidden"
+    >
+      <div class="flex justify-between max-sm:justify-center max-sm:gap-1">
+        <app-button
+          [text]="'Discard'"
+          [textColor]="' text-grey-3 dark:text-white'"
+          [backgroundColor]="'dark:bg-darkblue-2 bg-grey-1'"
+          [width]="'w-24'"
+          [borderRadius]="'rounded-full'"
+          (click)="onCancel()"
+        ></app-button>
+        <div class="flex gap-3">
+          <app-button
+            [text]="'Save as Draft'"
+            [textColor]="'text-grey-3'"
+            [backgroundColor]="'bg-grey-4'"
+            [width]="'w-36 max-sm:w-32'"
+            [borderRadius]="'rounded-full'"
+            (click)="onSubmit('draft')"
+          ></app-button>
+          <app-button
+            [text]="'Save & Send'"
+            [textColor]="'text-white'"
+            [backgroundColor]="'bg-purple-1'"
+            [width]="'w-36 max-sm:w-32'"
+            [borderRadius]="'rounded-full'"
+            (click)="onSubmit('pending')"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ -->

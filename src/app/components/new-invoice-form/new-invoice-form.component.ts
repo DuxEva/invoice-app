@@ -1,27 +1,44 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import * as InvoiceActions from '../../store/invoice/invoice.actions';
 import { ToastrService } from 'ngx-toastr';
 import { Invoice, Item } from '../../model/types.model';
+import { ActivatedRoute } from '@angular/router';
+import { selectInvoiceById } from '../../store/invoice/invoice.selector';
 
 @Component({
   selector: 'app-new-invoice-form',
   templateUrl: './new-invoice-form.component.html',
   styleUrls: ['./new-invoice-form.component.css'],
 })
-export class NewInvoiceFormComponent {
+export class NewInvoiceFormComponent implements OnInit {
   addressForm!: FormGroup;
   @Output() isFormOpen = new EventEmitter();
   @Input() isOpen = false;
   items: Item[] = [];
+  @Input() Invoice: Invoice | undefined;
 
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {
     this.createForm();
+  }
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.store.pipe(select(selectInvoiceById(id))).subscribe((invoice) => {
+        this.Invoice = invoice;
+      });
+    }
+
+    if (this.Invoice) {
+      this.populateFormForEdit();
+    }
   }
 
   createForm() {
@@ -40,6 +57,26 @@ export class NewInvoiceFormComponent {
       paymentTerms: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
+  }
+
+  populateFormForEdit() {
+    // Populate the form if editing an existing invoice
+    this.addressForm.patchValue({
+      senderStreet: this.Invoice?.senderAddress.street,
+      senderCity: this.Invoice?.senderAddress.city,
+      senderCountry: this.Invoice?.senderAddress.country,
+      senderPostalCode: this.Invoice?.senderAddress.postCode,
+      clientName: this.Invoice?.clientName,
+      clientEmail: this.Invoice?.clientEmail,
+      clientStreet: this.Invoice?.clientAddress.street,
+      clientCity: this.Invoice?.clientAddress.city,
+      clientCountry: this.Invoice?.clientAddress.country,
+      clientPostalCode: this.Invoice?.clientAddress.postCode,
+      invoiceDate: this.Invoice?.createdAt,
+      paymentTerms: this.Invoice?.paymentTerms,
+      description: this.Invoice?.description,
+    });
+    this.items = this.Invoice?.items || [];
   }
 
   onSubmit(status: string) {

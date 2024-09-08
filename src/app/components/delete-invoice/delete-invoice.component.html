@@ -1,20 +1,20 @@
 <div
-  class="fixed inset-0 flex items-center justify-center  bg-[#000] bg-opacity-50 z-30"
+  class="fixed inset-0 flex items-center justify-center bg-[#000] bg-opacity-50 z-30"
   [ngClass]="{ hidden: !isOpen }"
 >
   <div
-    class="w-[85%] max-h-[80%] lg:w-[44%] xl:w-[40%] sm:w-[60%] md:w-[65%] bg-white dark:bg-darkblue-2 z-20 p-4 rounded-2xl animate-scale-up mx-auto"
+    class="w-[85%] min-h-[25%] lg:w-[44%] xl:w-[40%] sm:w-[60%] md:w-[65%] bg-white dark:bg-darkblue-2 z-20 p-4 rounded-2xl animate-scale-up mx-auto"
   >
     <div class="px-3">
-      <h1 class="text-black-2 dark:text-white text-3xl font-bold mb-2">
+      <h1 class="text-black-2 dark:text-white text-3xl font-bold mt-6">
         Confirm Deletion
       </h1>
-      <p class="text-purple-3 dark:text-white">
+      <p class="text-purple-3 dark:text-white mt-4">
         Are you sure you want to delete invoice #{{ invoiceId }}? This action
         cannot be undone.
       </p>
     </div>
-    <div class="flex justify-end">
+    <div class="flex justify-end mt-8">
       <div class="flex w-1/2 items-center gap-5 justify-end">
         <button
           class="w-full bg-grey-1 dark:bg-darkblue-1 rounded-full py-2 text-purple-3 font-semibold"
